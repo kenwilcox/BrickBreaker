@@ -15,7 +15,10 @@
   CGPoint _touchLocation;
 }
 
--(id)initWithSize:(CGSize)size {
+static const uint32_t kBallCategory = 0x1 << 0;
+static const uint32_t kPaddleCategory = 0x1 << 1;
+
+- (id)initWithSize:(CGSize)size {
   if (self = [super initWithSize:size]) {
     /* Setup your scene here */
     
@@ -26,18 +29,18 @@
     _paddle.position = CGPointMake(self.size.width * 0.5, 90);
     _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
     _paddle.physicsBody.dynamic = NO;
+    _paddle.physicsBody.categoryBitMask = kPaddleCategory;
     [self addChild:_paddle];
     
     // Turn off gravity
     self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
+    // Set contact delgate
+    self.physicsWorld.contactDelegate = self;
     
     // Setup edge
-    // Create a smaller box for the ball...
-    CGFloat height = self.frame.size.height - (90 - _paddle.size.height);
-    CGRect rect = CGRectMake(self.frame.origin.x, (90 - _paddle.size.height), self.frame.size.width, height);
-    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:rect];
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     
-    [self createBallWithLocation:CGPointMake(size.width * 0.5, size.height * 0.5)
+    [self createBallWithLocation:CGPointMake(self.size.width * 0.5, self.size.height * 0.5)
                      andVelocity:CGVectorMake(40, 180)];
     
   }
@@ -46,7 +49,7 @@
 
 #pragma mark Generators
 
--(SKSpriteNode*)nodeFromImage:(UIImage*)image {
+- (SKSpriteNode*)nodeFromImage:(UIImage*)image {
   // All the images are twice the size as I want. I'm not sure why yet...
   SKSpriteNode *node = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:image]];
   CGFloat scale = [[UIScreen mainScreen] scale];
@@ -54,7 +57,7 @@
   return node;
 }
 
--(SKSpriteNode*)createBallWithLocation:(CGPoint)position andVelocity:(CGVector)velocity
+- (SKSpriteNode*)createBallWithLocation:(CGPoint)position andVelocity:(CGVector)velocity
 {
   SKSpriteNode *ball = [self nodeFromImage:[Images imageOfBall]];
   ball.name = @"ball";
@@ -64,20 +67,22 @@
   ball.physicsBody.linearDamping = 0.0;
   ball.physicsBody.restitution = 1.0;
   ball.physicsBody.velocity = velocity;
+  ball.physicsBody.categoryBitMask = kBallCategory;
+  ball.physicsBody.contactTestBitMask = kPaddleCategory;
   [self addChild:ball];
   return ball;
 }
 
 #pragma mark SKNode Receivers
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   /* Called when a touch begins */
   for (UITouch *touch in touches) {
     _touchLocation = [touch locationInNode:self];
   }
 }
 
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
   for (UITouch *touch in touches) {
     // Calculate how far touch has moved on x axis
     CGFloat xMovement = [touch locationInNode:self].x - _touchLocation.x;
@@ -98,8 +103,18 @@
   }
 }
 
--(void)update:(CFTimeInterval)currentTime {
+- (void)update:(CFTimeInterval)currentTime {
   /* Called before each frame is rendered */
 }
 
+#pragma mark SKPhysicsContactDelegates
+
+- (void)didBeginContact:(SKPhysicsContact *)contact
+{
+}
+
+- (void)didEndContact:(SKPhysicsContact *)contact
+{
+  
+}
 @end
