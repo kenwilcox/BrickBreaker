@@ -41,12 +41,16 @@ static const uint32_t kBrickCategory = 0x1 << 2;
     [self addChild:_brickLayer];
     
     // Add some bricks
-    UIColor *greenBrick = [UIColor colorWithRed:0.561 green:0.780 blue:0.149 alpha:1];
-    //UIColor *yellowBrick = [UIColor colorWithRed:0.995 green:0.764 blue:0.037 alpha:1];
+    UIColor *purpleBrickColor = [UIColor colorWithRed:0.435 green:0.263 blue:0.512 alpha:1];
+//    UIColor *redBrickColor = [UIColor colorWithRed:0.924 green:0.118 blue:0.166 alpha:1];
+//    UIColor *yellowBrickColor = [UIColor colorWithRed:0.995 green:0.764 blue:0.037 alpha:1];
+//    UIColor *greenBrickColor = [UIColor colorWithRed:0.561 green:0.780 blue:0.149 alpha:1];
+//    UIColor *blueBrickColor = [UIColor colorWithRed:0.244 green:0.694 blue:0.925 alpha:1];
+//    UIColor *grayBrickColor = [UIColor colorWithRed:0.756 green:0.756 blue:0.756 alpha:1];
     
     for (int row = 0; row < 5; row++) {
       for (int col = 0; col < 6; col++) {
-        SKSpriteNode *brick = [self brickOfColor:greenBrick];
+        SKSpriteNode *brick = [self brickOfColor:purpleBrickColor];
         brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
                                      , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
         
