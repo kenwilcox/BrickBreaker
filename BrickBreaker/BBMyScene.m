@@ -22,7 +22,7 @@
     self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
     
     // Setup the paddle
-    UIImage* theImage = [Images imageOfGamePaddle];
+    UIImage* theImage = [Images imageOfPaddle];
     _paddle = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:theImage]];
     _paddle.size = CGSizeMake(_paddle.size.width * 0.5, _paddle.size.height * 0.5);
     _paddle.position = CGPointMake(self.size.width * 0.5, 90);

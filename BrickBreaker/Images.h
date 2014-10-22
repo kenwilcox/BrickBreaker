@@ -15,7 +15,7 @@
 @interface Images : NSObject
 
 // iOS Controls Customization Outlets
-@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* gamePaddleTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* paddleTargets;
 
 // Colors
 + (UIColor*)lightColor;
@@ -25,9 +25,9 @@
 + (UIColor*)darkColor;
 
 // Drawing Methods
-+ (void)drawGamePaddle;
++ (void)drawPaddle;
 
 // Generated Images
-+ (UIImage*)imageOfGamePaddle;
++ (UIImage*)imageOfPaddle;
 
 @end

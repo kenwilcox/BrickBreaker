@@ -21,7 +21,7 @@ static UIColor* _edgeColor = nil;
 static UIColor* _topColor = nil;
 static UIColor* _darkColor = nil;
 
-static UIImage* _imageOfGamePaddle = nil;
+static UIImage* _imageOfPaddle = nil;
 
 #pragma mark Initialization
 
@@ -46,10 +46,10 @@ static UIImage* _imageOfGamePaddle = nil;
 
 #pragma mark Drawing Methods
 
-+ (void)drawGamePaddle;
++ (void)drawPaddle;
 {
 
-    //// Paddle
+    //// Paddle1
     {
         //// Outer Edge Drawing
         UIBezierPath* outerEdgePath = UIBezierPath.bezierPath;
@@ -226,27 +226,27 @@ static UIImage* _imageOfGamePaddle = nil;
 
 #pragma mark Generated Images
 
-+ (UIImage*)imageOfGamePaddle;
++ (UIImage*)imageOfPaddle;
 {
-    if (_imageOfGamePaddle)
-        return _imageOfGamePaddle;
+    if (_imageOfPaddle)
+        return _imageOfPaddle;
 
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(106, 26), NO, 0.0f);
-    [Images drawGamePaddle];
-    _imageOfGamePaddle = UIGraphicsGetImageFromCurrentImageContext();
+    [Images drawPaddle];
+    _imageOfPaddle = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
-    return _imageOfGamePaddle;
+    return _imageOfPaddle;
 }
 
 #pragma mark Customization Infrastructure
 
-- (void)setGamePaddleTargets: (NSArray*)gamePaddleTargets
+- (void)setPaddleTargets: (NSArray*)paddleTargets
 {
-    _gamePaddleTargets = gamePaddleTargets;
+    _paddleTargets = paddleTargets;
 
-    for (id target in self.gamePaddleTargets)
-        [target setImage: Images.imageOfGamePaddle];
+    for (id target in self.paddleTargets)
+        [target setImage: Images.imageOfPaddle];
 }
 
 
