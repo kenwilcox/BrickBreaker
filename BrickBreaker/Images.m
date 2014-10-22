@@ -46,10 +46,10 @@ static UIImage* _imageOfPaddle = nil;
 
 #pragma mark Drawing Methods
 
-+ (void)drawPaddle;
++ (void)drawPaddle
 {
 
-    //// Paddle1
+    //// GamePaddle
     {
         //// Outer Edge Drawing
         UIBezierPath* outerEdgePath = UIBezierPath.bezierPath;
@@ -226,13 +226,14 @@ static UIImage* _imageOfPaddle = nil;
 
 #pragma mark Generated Images
 
-+ (UIImage*)imageOfPaddle;
++ (UIImage*)imageOfPaddle
 {
     if (_imageOfPaddle)
         return _imageOfPaddle;
 
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(106, 26), NO, 0.0f);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(104, 24), NO, 0.0f);
     [Images drawPaddle];
+
     _imageOfPaddle = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
