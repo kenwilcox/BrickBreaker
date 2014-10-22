@@ -24,13 +24,19 @@
     // Setup the paddle
     _paddle = [self nodeFromImage:[Images imageOfPaddle]];
     _paddle.position = CGPointMake(self.size.width * 0.5, 90);
+    _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
+    _paddle.physicsBody.dynamic = NO;
     [self addChild:_paddle];
     
     // Turn off gravity
     self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
     
     // Setup edge
-    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    // Create a smaller box for the ball...
+    CGFloat height = self.frame.size.height - (90 - _paddle.size.height);
+    CGRect rect = CGRectMake(self.frame.origin.x, (90 - _paddle.size.height), self.frame.size.width, height);
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:rect];
+    
     [self createBallWithLocation:CGPointMake(size.width * 0.5, size.height * 0.5)
                      andVelocity:CGVectorMake(40, 180)];
     
@@ -43,8 +49,8 @@
 -(SKSpriteNode*)nodeFromImage:(UIImage*)image {
   // All the images are twice the size as I want. I'm not sure why yet...
   SKSpriteNode *node = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:image]];
-  //node.size = CGSizeMake(node.size.width * 0.5, node.size.height * 0.5);
-  [node setScale:(0.5)];
+  CGFloat scale = [[UIScreen mainScreen] scale];
+  [node setScale:1 / scale];
   return node;
 }
 
