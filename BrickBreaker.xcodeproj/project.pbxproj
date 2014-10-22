@@ -23,10 +23,8 @@
 		BE843DB219F5768C00298057 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8D19F5768C00298057 /* UIKit.framework */; };
 		BE843DBA19F5768C00298057 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE843DB819F5768C00298057 /* InfoPlist.strings */; };
 		BE843DBC19F5768C00298057 /* BrickBreakerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE843DBB19F5768C00298057 /* BrickBreakerTests.m */; };
-		BE843DC919F5775000298057 /* BallBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE843DC619F5775000298057 /* BallBlue@2x.png */; };
-		BE843DCA19F5775000298057 /* BrickGreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE843DC719F5775000298057 /* BrickGreen@2x.png */; };
-		BE843DCB19F5775000298057 /* Paddle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE843DC819F5775000298057 /* Paddle@2x.png */; };
 		BE843DCD19F5787700298057 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BE843DCC19F5787700298057 /* README.md */; };
+		BE843DD019F7330D00298057 /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = BE843DCF19F7330D00298057 /* Images.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,10 +60,9 @@
 		BE843DB719F5768C00298057 /* BrickBreakerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BrickBreakerTests-Info.plist"; sourceTree = "<group>"; };
 		BE843DB919F5768C00298057 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BE843DBB19F5768C00298057 /* BrickBreakerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickBreakerTests.m; sourceTree = "<group>"; };
-		BE843DC619F5775000298057 /* BallBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BallBlue@2x.png"; sourceTree = "<group>"; };
-		BE843DC719F5775000298057 /* BrickGreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BrickGreen@2x.png"; sourceTree = "<group>"; };
-		BE843DC819F5775000298057 /* Paddle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Paddle@2x.png"; sourceTree = "<group>"; };
 		BE843DCC19F5787700298057 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		BE843DCE19F7330D00298057 /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Images.h; sourceTree = "<group>"; };
+		BE843DCF19F7330D00298057 /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Images.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +125,8 @@
 		BE843D9119F5768C00298057 /* BrickBreaker */ = {
 			isa = PBXGroup;
 			children = (
-				BE843DC519F5775000298057 /* Graphics */,
+				BE843DCE19F7330D00298057 /* Images.h */,
+				BE843DCF19F7330D00298057 /* Images.m */,
 				BE843D9A19F5768C00298057 /* BBAppDelegate.h */,
 				BE843D9B19F5768C00298057 /* BBAppDelegate.m */,
 				BE843D9D19F5768C00298057 /* Main.storyboard */,
@@ -169,16 +167,6 @@
 				BE843DB819F5768C00298057 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BE843DC519F5775000298057 /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				BE843DC619F5775000298057 /* BallBlue@2x.png */,
-				BE843DC719F5775000298057 /* BrickGreen@2x.png */,
-				BE843DC819F5775000298057 /* Paddle@2x.png */,
-			);
-			path = Graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,13 +246,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE843DCA19F5775000298057 /* BrickGreen@2x.png in Resources */,
 				BE843D9619F5768C00298057 /* InfoPlist.strings in Resources */,
-				BE843DCB19F5775000298057 /* Paddle@2x.png in Resources */,
 				BE843DCD19F5787700298057 /* README.md in Resources */,
 				BE843DA919F5768C00298057 /* Images.xcassets in Resources */,
 				BE843D9F19F5768C00298057 /* Main.storyboard in Resources */,
-				BE843DC919F5775000298057 /* BallBlue@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +270,7 @@
 			files = (
 				BE843DA219F5768C00298057 /* BBViewController.m in Sources */,
 				BE843D9C19F5768C00298057 /* BBAppDelegate.m in Sources */,
+				BE843DD019F7330D00298057 /* Images.m in Sources */,
 				BE843DA519F5768C00298057 /* BBMyScene.m in Sources */,
 				BE843D9819F5768C00298057 /* main.m in Sources */,
 			);
