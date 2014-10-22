@@ -22,15 +22,47 @@
     self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
     
     // Setup the paddle
-    UIImage* theImage = [Images imageOfPaddle];
-    _paddle = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:theImage]];
-    _paddle.size = CGSizeMake(_paddle.size.width * 0.5, _paddle.size.height * 0.5);
+    _paddle = [self nodeFromImage:[Images imageOfPaddle]];
     _paddle.position = CGPointMake(self.size.width * 0.5, 90);
     [self addChild:_paddle];
+    
+    // Turn off gravity
+    self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
+    
+    // Setup edge
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    [self createBallWithLocation:CGPointMake(size.width * 0.5, size.height * 0.5)
+                     andVelocity:CGVectorMake(40, 180)];
     
   }
   return self;
 }
+
+#pragma mark Generators
+
+-(SKSpriteNode*)nodeFromImage:(UIImage*)image {
+  // All the images are twice the size as I want. I'm not sure why yet...
+  SKSpriteNode *node = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:image]];
+  //node.size = CGSizeMake(node.size.width * 0.5, node.size.height * 0.5);
+  [node setScale:(0.5)];
+  return node;
+}
+
+-(SKSpriteNode*)createBallWithLocation:(CGPoint)position andVelocity:(CGVector)velocity
+{
+  SKSpriteNode *ball = [self nodeFromImage:[Images imageOfBall]];
+  ball.name = @"ball";
+  ball.position = position;
+  ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball.size.width * 0.5];
+  ball.physicsBody.friction = 0.0;
+  ball.physicsBody.linearDamping = 0.0;
+  ball.physicsBody.restitution = 1.0;
+  ball.physicsBody.velocity = velocity;
+  [self addChild:ball];
+  return ball;
+}
+
+#pragma mark SKNode Receivers
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   /* Called when a touch begins */

@@ -16,18 +16,25 @@
 
 // iOS Controls Customization Outlets
 @property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* paddleTargets;
+@property(strong, nonatomic) IBOutletCollection(NSObject) NSArray* ballTargets;
 
 // Colors
++ (UIColor*)ballBottomColor;
 + (UIColor*)lightColor;
 + (UIColor*)bottomColor;
 + (UIColor*)edgeColor;
++ (UIColor*)ballBorderColor;
++ (UIColor*)ballGlowColor;
++ (UIColor*)ballReflectionColor;
 + (UIColor*)topColor;
 + (UIColor*)darkColor;
 
 // Drawing Methods
 + (void)drawPaddle;
++ (void)drawBall;
 
 // Generated Images
 + (UIImage*)imageOfPaddle;
++ (UIImage*)imageOfBall;
 
 @end

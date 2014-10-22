@@ -15,22 +15,31 @@
 
 #pragma mark Cache
 
+static UIColor* _ballBottomColor = nil;
 static UIColor* _lightColor = nil;
 static UIColor* _bottomColor = nil;
 static UIColor* _edgeColor = nil;
+static UIColor* _ballBorderColor = nil;
+static UIColor* _ballGlowColor = nil;
+static UIColor* _ballReflectionColor = nil;
 static UIColor* _topColor = nil;
 static UIColor* _darkColor = nil;
 
 static UIImage* _imageOfPaddle = nil;
+static UIImage* _imageOfBall = nil;
 
 #pragma mark Initialization
 
 + (void)initialize
 {
     // Colors Initialization
+    _ballBottomColor = [UIColor colorWithRed: 0.414 green: 0.769 blue: 0.94 alpha: 1];
     _lightColor = [UIColor colorWithRed: 0.244 green: 0.694 blue: 0.925 alpha: 1];
     _bottomColor = [UIColor colorWithRed: 0.774 green: 0.774 blue: 0.774 alpha: 1];
     _edgeColor = [UIColor colorWithRed: 0.076 green: 0.411 blue: 0.606 alpha: 1];
+    _ballBorderColor = [UIColor colorWithRed: 0.119 green: 0.611 blue: 0.901 alpha: 1];
+    _ballGlowColor = [UIColor colorWithRed: 0.706 green: 0.893 blue: 0.975 alpha: 1];
+    _ballReflectionColor = [UIColor colorWithRed: 0.576 green: 0.835 blue: 0.96 alpha: 1];
     _topColor = [UIColor colorWithRed: 0.816 green: 0.816 blue: 0.816 alpha: 1];
     _darkColor = [UIColor colorWithRed: 0.099 green: 0.576 blue: 0.858 alpha: 1];
 
@@ -38,9 +47,13 @@ static UIImage* _imageOfPaddle = nil;
 
 #pragma mark Colors
 
++ (UIColor*)ballBottomColor { return _ballBottomColor; }
 + (UIColor*)lightColor { return _lightColor; }
 + (UIColor*)bottomColor { return _bottomColor; }
 + (UIColor*)edgeColor { return _edgeColor; }
++ (UIColor*)ballBorderColor { return _ballBorderColor; }
++ (UIColor*)ballGlowColor { return _ballGlowColor; }
++ (UIColor*)ballReflectionColor { return _ballReflectionColor; }
 + (UIColor*)topColor { return _topColor; }
 + (UIColor*)darkColor { return _darkColor; }
 
@@ -224,6 +237,132 @@ static UIImage* _imageOfPaddle = nil;
     }
 }
 
++ (void)drawBall
+{
+
+    //// Ball Image
+    {
+        //// Ball Border Drawing
+        UIBezierPath* ballBorderPath = UIBezierPath.bezierPath;
+        [ballBorderPath moveToPoint: CGPointMake(2.2, 8.85)];
+        [ballBorderPath addCurveToPoint: CGPointMake(1.95, 11) controlPoint1: CGPointMake(2.03, 9.52) controlPoint2: CGPointMake(1.95, 10.23)];
+        [ballBorderPath addCurveToPoint: CGPointMake(4.55, 17.35) controlPoint1: CGPointMake(1.95, 13.5) controlPoint2: CGPointMake(2.82, 15.62)];
+        [ballBorderPath addCurveToPoint: CGPointMake(10.95, 20) controlPoint1: CGPointMake(6.32, 19.12) controlPoint2: CGPointMake(8.45, 20)];
+        [ballBorderPath addCurveToPoint: CGPointMake(17.3, 17.35) controlPoint1: CGPointMake(13.45, 20) controlPoint2: CGPointMake(15.57, 19.12)];
+        [ballBorderPath addCurveToPoint: CGPointMake(19.95, 11) controlPoint1: CGPointMake(19.07, 15.62) controlPoint2: CGPointMake(19.95, 13.5)];
+        [ballBorderPath addLineToPoint: CGPointMake(19.7, 8.85)];
+        [ballBorderPath addCurveToPoint: CGPointMake(17.3, 4.6) controlPoint1: CGPointMake(19.33, 7.25) controlPoint2: CGPointMake(18.53, 5.83)];
+        [ballBorderPath addCurveToPoint: CGPointMake(12.55, 2.15) controlPoint1: CGPointMake(15.93, 3.23) controlPoint2: CGPointMake(14.35, 2.42)];
+        [ballBorderPath addLineToPoint: CGPointMake(10.95, 2)];
+        [ballBorderPath addLineToPoint: CGPointMake(9.4, 2.15)];
+        [ballBorderPath addCurveToPoint: CGPointMake(4.55, 4.6) controlPoint1: CGPointMake(7.53, 2.42) controlPoint2: CGPointMake(5.92, 3.23)];
+        [ballBorderPath addCurveToPoint: CGPointMake(2.2, 8.85) controlPoint1: CGPointMake(3.35, 5.83) controlPoint2: CGPointMake(2.57, 7.25)];
+        [ballBorderPath closePath];
+        [ballBorderPath moveToPoint: CGPointMake(-0.05, 11)];
+        [ballBorderPath addCurveToPoint: CGPointMake(3.15, 3.2) controlPoint1: CGPointMake(-0.05, 7.97) controlPoint2: CGPointMake(1.02, 5.37)];
+        [ballBorderPath addCurveToPoint: CGPointMake(10.95, 0) controlPoint1: CGPointMake(5.32, 1.07) controlPoint2: CGPointMake(7.92, 0)];
+        [ballBorderPath addCurveToPoint: CGPointMake(18.75, 3.2) controlPoint1: CGPointMake(14.02, 0) controlPoint2: CGPointMake(16.62, 1.07)];
+        [ballBorderPath addCurveToPoint: CGPointMake(21.95, 11) controlPoint1: CGPointMake(20.88, 5.33) controlPoint2: CGPointMake(21.95, 7.93)];
+        [ballBorderPath addCurveToPoint: CGPointMake(18.75, 18.75) controlPoint1: CGPointMake(21.95, 14.03) controlPoint2: CGPointMake(20.88, 16.62)];
+        [ballBorderPath addCurveToPoint: CGPointMake(10.95, 22) controlPoint1: CGPointMake(16.58, 20.92) controlPoint2: CGPointMake(13.98, 22)];
+        [ballBorderPath addCurveToPoint: CGPointMake(3.15, 18.8) controlPoint1: CGPointMake(7.88, 22) controlPoint2: CGPointMake(5.28, 20.93)];
+        [ballBorderPath addCurveToPoint: CGPointMake(-0.05, 11) controlPoint1: CGPointMake(1.02, 16.67) controlPoint2: CGPointMake(-0.05, 14.07)];
+        [ballBorderPath closePath];
+        [ballBorderPath moveToPoint: CGPointMake(18.75, 18.75)];
+        [ballBorderPath addLineToPoint: CGPointMake(18.7, 18.8)];
+        [ballBorderPath addLineToPoint: CGPointMake(18.75, 18.75)];
+        [ballBorderPath closePath];
+        ballBorderPath.miterLimit = 4;
+
+        ballBorderPath.lineCapStyle = kCGLineCapRound;
+
+        ballBorderPath.lineJoinStyle = kCGLineJoinRound;
+
+        [Images.ballBorderColor setFill];
+        [ballBorderPath fill];
+
+
+        //// Ball Bottom Drawing
+        UIBezierPath* ballBottomPath = UIBezierPath.bezierPath;
+        [ballBottomPath moveToPoint: CGPointMake(1.95, 11)];
+        [ballBottomPath addCurveToPoint: CGPointMake(2.2, 8.85) controlPoint1: CGPointMake(1.95, 10.23) controlPoint2: CGPointMake(2.03, 9.52)];
+        [ballBottomPath addCurveToPoint: CGPointMake(4.55, 11.35) controlPoint1: CGPointMake(2.57, 9.78) controlPoint2: CGPointMake(3.35, 10.62)];
+        [ballBottomPath addCurveToPoint: CGPointMake(10.95, 13) controlPoint1: CGPointMake(6.32, 12.45) controlPoint2: CGPointMake(8.45, 13)];
+        [ballBottomPath addCurveToPoint: CGPointMake(17.3, 11.35) controlPoint1: CGPointMake(13.45, 13) controlPoint2: CGPointMake(15.57, 12.45)];
+        [ballBottomPath addCurveToPoint: CGPointMake(19.7, 8.85) controlPoint1: CGPointMake(18.53, 10.62) controlPoint2: CGPointMake(19.33, 9.78)];
+        [ballBottomPath addLineToPoint: CGPointMake(19.95, 11)];
+        [ballBottomPath addCurveToPoint: CGPointMake(17.3, 17.35) controlPoint1: CGPointMake(19.95, 13.5) controlPoint2: CGPointMake(19.07, 15.62)];
+        [ballBottomPath addCurveToPoint: CGPointMake(10.95, 20) controlPoint1: CGPointMake(15.57, 19.12) controlPoint2: CGPointMake(13.45, 20)];
+        [ballBottomPath addCurveToPoint: CGPointMake(4.55, 17.35) controlPoint1: CGPointMake(8.45, 20) controlPoint2: CGPointMake(6.32, 19.12)];
+        [ballBottomPath addCurveToPoint: CGPointMake(1.95, 11) controlPoint1: CGPointMake(2.82, 15.62) controlPoint2: CGPointMake(1.95, 13.5)];
+        [ballBottomPath closePath];
+        ballBottomPath.miterLimit = 4;
+
+        ballBottomPath.lineCapStyle = kCGLineCapRound;
+
+        ballBottomPath.lineJoinStyle = kCGLineJoinRound;
+
+        [Images.ballBottomColor setFill];
+        [ballBottomPath fill];
+
+
+        //// Ball Reflection Drawing
+        UIBezierPath* ballReflectionPath = UIBezierPath.bezierPath;
+        [ballReflectionPath moveToPoint: CGPointMake(19.7, 8.85)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(17.3, 11.35) controlPoint1: CGPointMake(19.33, 9.78) controlPoint2: CGPointMake(18.53, 10.62)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(10.95, 13) controlPoint1: CGPointMake(15.57, 12.45) controlPoint2: CGPointMake(13.45, 13)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(4.55, 11.35) controlPoint1: CGPointMake(8.45, 13) controlPoint2: CGPointMake(6.32, 12.45)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(2.2, 8.85) controlPoint1: CGPointMake(3.35, 10.62) controlPoint2: CGPointMake(2.57, 9.78)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(4.55, 4.6) controlPoint1: CGPointMake(2.57, 7.25) controlPoint2: CGPointMake(3.35, 5.83)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(9.4, 2.15) controlPoint1: CGPointMake(5.92, 3.23) controlPoint2: CGPointMake(7.53, 2.42)];
+        [ballReflectionPath addLineToPoint: CGPointMake(10.95, 2.05)];
+        [ballReflectionPath addLineToPoint: CGPointMake(12.55, 2.15)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(17.3, 4.6) controlPoint1: CGPointMake(14.35, 2.42) controlPoint2: CGPointMake(15.93, 3.23)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(19.7, 8.85) controlPoint1: CGPointMake(18.53, 5.83) controlPoint2: CGPointMake(19.33, 7.25)];
+        [ballReflectionPath closePath];
+        [ballReflectionPath moveToPoint: CGPointMake(17.05, 7.5)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(16.3, 5.7) controlPoint1: CGPointMake(17.05, 6.8) controlPoint2: CGPointMake(16.8, 6.2)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(14.55, 5) controlPoint1: CGPointMake(15.83, 5.23) controlPoint2: CGPointMake(15.25, 5)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(12.8, 5.7) controlPoint1: CGPointMake(13.88, 5) controlPoint2: CGPointMake(13.3, 5.23)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(12.05, 7.5) controlPoint1: CGPointMake(12.3, 6.2) controlPoint2: CGPointMake(12.05, 6.8)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(12.8, 9.25) controlPoint1: CGPointMake(12.05, 8.2) controlPoint2: CGPointMake(12.3, 8.78)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(14.55, 10) controlPoint1: CGPointMake(13.3, 9.75) controlPoint2: CGPointMake(13.88, 10)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(16.3, 9.25) controlPoint1: CGPointMake(15.25, 10) controlPoint2: CGPointMake(15.83, 9.75)];
+        [ballReflectionPath addCurveToPoint: CGPointMake(17.05, 7.5) controlPoint1: CGPointMake(16.8, 8.78) controlPoint2: CGPointMake(17.05, 8.2)];
+        [ballReflectionPath closePath];
+        ballReflectionPath.miterLimit = 4;
+
+        ballReflectionPath.lineCapStyle = kCGLineCapRound;
+
+        ballReflectionPath.lineJoinStyle = kCGLineJoinRound;
+
+        [Images.ballReflectionColor setFill];
+        [ballReflectionPath fill];
+
+
+        //// Ball Glow Drawing
+        UIBezierPath* ballGlowPath = UIBezierPath.bezierPath;
+        [ballGlowPath moveToPoint: CGPointMake(16.3, 5.7)];
+        [ballGlowPath addCurveToPoint: CGPointMake(17.05, 7.5) controlPoint1: CGPointMake(16.8, 6.2) controlPoint2: CGPointMake(17.05, 6.8)];
+        [ballGlowPath addCurveToPoint: CGPointMake(16.3, 9.25) controlPoint1: CGPointMake(17.05, 8.2) controlPoint2: CGPointMake(16.8, 8.78)];
+        [ballGlowPath addCurveToPoint: CGPointMake(14.55, 10) controlPoint1: CGPointMake(15.83, 9.75) controlPoint2: CGPointMake(15.25, 10)];
+        [ballGlowPath addCurveToPoint: CGPointMake(12.8, 9.25) controlPoint1: CGPointMake(13.88, 10) controlPoint2: CGPointMake(13.3, 9.75)];
+        [ballGlowPath addCurveToPoint: CGPointMake(12.05, 7.5) controlPoint1: CGPointMake(12.3, 8.78) controlPoint2: CGPointMake(12.05, 8.2)];
+        [ballGlowPath addCurveToPoint: CGPointMake(12.8, 5.7) controlPoint1: CGPointMake(12.05, 6.8) controlPoint2: CGPointMake(12.3, 6.2)];
+        [ballGlowPath addCurveToPoint: CGPointMake(14.55, 5) controlPoint1: CGPointMake(13.3, 5.23) controlPoint2: CGPointMake(13.88, 5)];
+        [ballGlowPath addCurveToPoint: CGPointMake(16.3, 5.7) controlPoint1: CGPointMake(15.25, 5) controlPoint2: CGPointMake(15.83, 5.23)];
+        [ballGlowPath closePath];
+        ballGlowPath.miterLimit = 4;
+
+        ballGlowPath.lineCapStyle = kCGLineCapRound;
+
+        ballGlowPath.lineJoinStyle = kCGLineJoinRound;
+
+        [Images.ballGlowColor setFill];
+        [ballGlowPath fill];
+    }
+}
+
 #pragma mark Generated Images
 
 + (UIImage*)imageOfPaddle
@@ -240,6 +379,20 @@ static UIImage* _imageOfPaddle = nil;
     return _imageOfPaddle;
 }
 
++ (UIImage*)imageOfBall
+{
+    if (_imageOfBall)
+        return _imageOfBall;
+
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(22, 22), NO, 0.0f);
+    [Images drawBall];
+
+    _imageOfBall = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return _imageOfBall;
+}
+
 #pragma mark Customization Infrastructure
 
 - (void)setPaddleTargets: (NSArray*)paddleTargets
@@ -248,6 +401,14 @@ static UIImage* _imageOfPaddle = nil;
 
     for (id target in self.paddleTargets)
         [target setImage: Images.imageOfPaddle];
+}
+
+- (void)setBallTargets: (NSArray*)ballTargets
+{
+    _ballTargets = ballTargets;
+
+    for (id target in self.ballTargets)
+        [target setImage: Images.imageOfBall];
 }
 
 
