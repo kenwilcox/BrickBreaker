@@ -14,6 +14,7 @@
   SKSpriteNode *_paddle;
   CGPoint _touchLocation;
   CGFloat _ballSpeed;
+  SKNode *_brickLayer;
 }
 
 static const uint32_t kBallCategory = 0x1 << 0;
@@ -32,6 +33,24 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     _paddle.physicsBody.dynamic = NO;
     _paddle.physicsBody.categoryBitMask = kPaddleCategory;
     [self addChild:_paddle];
+    
+    // Setup brick layer
+    _brickLayer = [SKNode node];
+    _brickLayer.position = CGPointMake(0, self.size.height);
+    [self addChild:_brickLayer];
+    
+    // Add some bricks
+    UIColor *greenBrick = [UIColor colorWithRed:0.561 green:0.780 blue:0.149 alpha:1];
+    //UIColor *yellowBrick = [UIColor colorWithRed:0.995 green:0.764 blue:0.037 alpha:1];
+    
+    for (int row = 0; row < 5; row++) {
+      for (int col = 0; col < 6; col++) {
+        SKSpriteNode *brick = [self brickOfColor:greenBrick];
+        brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
+                                     , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
+        [_brickLayer addChild:brick];
+      }
+    }
     
     // Turn off gravity
     self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
@@ -52,6 +71,11 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 }
 
 #pragma mark Generators
+
+- (SKSpriteNode*)brickOfColor:(UIColor*)color {
+  UIImage *image = [Images imageOfBrickWithBrickColor:color];
+  return [self nodeFromImage:image];
+}
 
 - (SKSpriteNode*)nodeFromImage:(UIImage*)image {
   // All the images are twice the size as I want. I'm not sure why yet...
