@@ -19,6 +19,7 @@
 
 static const uint32_t kBallCategory = 0x1 << 0;
 static const uint32_t kPaddleCategory = 0x1 << 1;
+static const uint32_t kBrickCategory = 0x1 << 2;
 
 - (id)initWithSize:(CGSize)size {
   if (self = [super initWithSize:size]) {
@@ -48,6 +49,11 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
         SKSpriteNode *brick = [self brickOfColor:greenBrick];
         brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
                                      , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
+        
+        brick.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:brick.size];
+        brick.physicsBody.categoryBitMask = kBrickCategory;
+        brick.physicsBody.dynamic = NO;
+        
         [_brickLayer addChild:brick];
       }
     }
@@ -96,7 +102,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
   ball.physicsBody.restitution = 1.0;
   ball.physicsBody.velocity = velocity;
   ball.physicsBody.categoryBitMask = kBallCategory;
-  ball.physicsBody.contactTestBitMask = kPaddleCategory;
+  ball.physicsBody.contactTestBitMask = kPaddleCategory | kBrickCategory;
   [self addChild:ball];
   return ball;
 }
@@ -150,6 +156,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     secondBody = contact.bodyB;
   }
   
+  // Ball and Paddle
   if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kPaddleCategory) {
     // Make sure the ball is above the paddle
     if (firstBody.node.position.y > secondBody.node.position.y) {
@@ -167,6 +174,12 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
       firstBody.velocity = CGVectorMake(direction.dx * _ballSpeed, direction.dy * _ballSpeed);
     }
   }
+  
+  // Ball and Brick
+  if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kBrickCategory) {
+    [secondBody.node runAction:[SKAction removeFromParent]];
+  }
+  
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact
