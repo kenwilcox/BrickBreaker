@@ -8,6 +8,8 @@
 
 #import "BBMyScene.h"
 #import "Images.h"
+#import "Images+SpriteKit.h"
+#import "BBBrick.h"
 
 @implementation BBMyScene
 {
@@ -19,16 +21,16 @@
 
 static const uint32_t kBallCategory = 0x1 << 0;
 static const uint32_t kPaddleCategory = 0x1 << 1;
-static const uint32_t kBrickCategory = 0x1 << 2;
 
-- (id)initWithSize:(CGSize)size {
+- (id)initWithSize:(CGSize)size
+{
   if (self = [super initWithSize:size]) {
     /* Setup your scene here */
     
     self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
     
     // Setup the paddle
-    _paddle = [self nodeFromImage:[Images imageOfPaddle]];
+    _paddle = [Images nodeFromImage:[Images imageOfPaddle]];
     _paddle.position = CGPointMake(self.size.width * 0.5, 90);
     _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
     _paddle.physicsBody.dynamic = NO;
@@ -40,32 +42,20 @@ static const uint32_t kBrickCategory = 0x1 << 2;
     _brickLayer.position = CGPointMake(0, self.size.height);
     [self addChild:_brickLayer];
     
-    // Add some bricks
-    UIColor *purpleBrickColor = [UIColor colorWithRed:0.435 green:0.263 blue:0.512 alpha:1];
-    UIColor *redBrickColor = [UIColor colorWithRed:0.924 green:0.118 blue:0.166 alpha:1];
-    UIColor *yellowBrickColor = [UIColor colorWithRed:0.995 green:0.764 blue:0.037 alpha:1];
-    UIColor *greenBrickColor = [UIColor colorWithRed:0.561 green:0.780 blue:0.149 alpha:1];
-    UIColor *blueBrickColor = [UIColor colorWithRed:0.244 green:0.694 blue:0.925 alpha:1];
-    UIColor *grayBrickColor = [UIColor colorWithRed:0.756 green:0.756 blue:0.756 alpha:1];
-    
     for (int row = 0; row < 5; row++) {
       for (int col = 0; col < 6; col++) {
-        UIColor *color;
+        BBBrick *brick;
         switch(col) {
-          case 0: color = purpleBrickColor;break;
-          case 1: color = redBrickColor;break;
-          case 2: color = yellowBrickColor;break;
-          case 3: color = greenBrickColor;break;
-          case 4: color = blueBrickColor;break;
-          case 5: color = grayBrickColor;break;
+          case 0: brick = [[BBBrick alloc] initWithType:Purple];break;
+          case 1: brick = [[BBBrick alloc] initWithType:Red];break;
+          case 2: brick = [[BBBrick alloc] initWithType:Yellow];break;
+          case 3: brick = [[BBBrick alloc] initWithType:Green];break;
+          case 4: brick = [[BBBrick alloc] initWithType:Blue];break;
+          case 5: brick = [[BBBrick alloc] initWithType:Gray];break;
         }
-        SKSpriteNode *brick = [self brickOfColor:color];
+
         brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
                                      , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
-        
-        brick.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:brick.size];
-        brick.physicsBody.categoryBitMask = kBrickCategory;
-        brick.physicsBody.dynamic = NO;
         
         [_brickLayer addChild:brick];
       }
@@ -91,22 +81,9 @@ static const uint32_t kBrickCategory = 0x1 << 2;
 
 #pragma mark Generators
 
-- (SKSpriteNode*)brickOfColor:(UIColor*)color {
-  UIImage *image = [Images imageOfBrickWithBrickColor:color];
-  return [self nodeFromImage:image];
-}
-
-- (SKSpriteNode*)nodeFromImage:(UIImage*)image {
-  // All the images are twice the size as I want. I'm not sure why yet...
-  SKSpriteNode *node = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImage:image]];
-//  CGFloat scale = [[UIScreen mainScreen] scale];
-//  [node setScale:1 / scale];
-  return node;
-}
-
 - (SKSpriteNode*)createBallWithLocation:(CGPoint)position andVelocity:(CGVector)velocity
 {
-  SKSpriteNode *ball = [self nodeFromImage:[Images imageOfBall]];
+  SKSpriteNode *ball = [Images nodeFromImage:[Images imageOfBall]];
   ball.name = @"ball";
   ball.position = position;
   ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball.size.width * 0.5];
@@ -122,14 +99,16 @@ static const uint32_t kBrickCategory = 0x1 << 2;
 
 #pragma mark SKNode Receivers
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
   /* Called when a touch begins */
   for (UITouch *touch in touches) {
     _touchLocation = [touch locationInNode:self];
   }
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
   for (UITouch *touch in touches) {
     // Calculate how far touch has moved on x axis
     CGFloat xMovement = [touch locationInNode:self].x - _touchLocation.x;
@@ -150,7 +129,8 @@ static const uint32_t kBrickCategory = 0x1 << 2;
   }
 }
 
-- (void)update:(CFTimeInterval)currentTime {
+- (void)update:(CFTimeInterval)currentTime
+{
   /* Called before each frame is rendered */
 }
 

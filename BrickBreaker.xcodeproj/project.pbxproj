@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE4FEEF519F9B8F900970903 /* BBBrick.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4FEEF419F9B8F900970903 /* BBBrick.m */; };
+		BE4FEEF819F9BBE900970903 /* Images+SpriteKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4FEEF719F9BBE900970903 /* Images+SpriteKit.m */; };
 		BE843D8A19F5768C00298057 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8919F5768C00298057 /* Foundation.framework */; };
 		BE843D8C19F5768C00298057 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8B19F5768C00298057 /* CoreGraphics.framework */; };
 		BE843D8E19F5768C00298057 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8D19F5768C00298057 /* UIKit.framework */; };
@@ -38,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE4FEEF319F9B8F900970903 /* BBBrick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBrick.h; sourceTree = "<group>"; };
+		BE4FEEF419F9B8F900970903 /* BBBrick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBrick.m; sourceTree = "<group>"; };
+		BE4FEEF619F9BBE900970903 /* Images+SpriteKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Images+SpriteKit.h"; sourceTree = "<group>"; };
+		BE4FEEF719F9BBE900970903 /* Images+SpriteKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Images+SpriteKit.m"; sourceTree = "<group>"; };
 		BE843D8619F5768C00298057 /* BrickBreaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickBreaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE843D8919F5768C00298057 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE843D8B19F5768C00298057 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -127,11 +133,15 @@
 			children = (
 				BE843DCE19F7330D00298057 /* Images.h */,
 				BE843DCF19F7330D00298057 /* Images.m */,
+				BE4FEEF619F9BBE900970903 /* Images+SpriteKit.h */,
+				BE4FEEF719F9BBE900970903 /* Images+SpriteKit.m */,
 				BE843D9A19F5768C00298057 /* BBAppDelegate.h */,
 				BE843D9B19F5768C00298057 /* BBAppDelegate.m */,
 				BE843D9D19F5768C00298057 /* Main.storyboard */,
 				BE843DA019F5768C00298057 /* BBViewController.h */,
 				BE843DA119F5768C00298057 /* BBViewController.m */,
+				BE4FEEF319F9B8F900970903 /* BBBrick.h */,
+				BE4FEEF419F9B8F900970903 /* BBBrick.m */,
 				BE843DA319F5768C00298057 /* BBMyScene.h */,
 				BE843DA419F5768C00298057 /* BBMyScene.m */,
 				BE843DA819F5768C00298057 /* Images.xcassets */,
@@ -271,8 +281,10 @@
 				BE843DA219F5768C00298057 /* BBViewController.m in Sources */,
 				BE843D9C19F5768C00298057 /* BBAppDelegate.m in Sources */,
 				BE843DD019F7330D00298057 /* Images.m in Sources */,
+				BE4FEEF819F9BBE900970903 /* Images+SpriteKit.m in Sources */,
 				BE843DA519F5768C00298057 /* BBMyScene.m in Sources */,
 				BE843D9819F5768C00298057 /* main.m in Sources */,
+				BE4FEEF519F9B8F900970903 /* BBBrick.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +491,7 @@
 				BE843DC119F5768C00298057 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BE843DC219F5768C00298057 /* Build configuration list for PBXNativeTarget "BrickBreakerTests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +500,7 @@
 				BE843DC419F5768C00298057 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
