@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Kenneth Wilcox. All rights reserved.
 //
 
-#import "Images+SpriteKit.h"
+#import "BBImages+SpriteKit.h"
 
 @implementation Images (SpriteKitLoader)
 

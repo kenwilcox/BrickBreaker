@@ -7,8 +7,8 @@
 //
 
 #import "BBMyScene.h"
-#import "Images.h"
-#import "Images+SpriteKit.h"
+#import "BBImages.h"
+#import "BBImages+SpriteKit.h"
 #import "BBBrick.h"
 
 @implementation BBMyScene

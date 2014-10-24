@@ -7,7 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "Images.h"
+#import "BBImages.h"
 
 @interface Images (SpriteKitLoader)
 
