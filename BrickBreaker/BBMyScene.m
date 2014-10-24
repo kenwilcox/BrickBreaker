@@ -30,7 +30,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
     
     // Setup the paddle
-    _paddle = [Images nodeFromImage:[Images imageOfPaddle]];
+    _paddle = [BBImages nodeFromImage:[BBImages imageOfPaddle]];
     _paddle.position = CGPointMake(self.size.width * 0.5, 90);
     _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
     _paddle.physicsBody.dynamic = NO;
@@ -83,7 +83,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 
 - (SKSpriteNode*)createBallWithLocation:(CGPoint)position andVelocity:(CGVector)velocity
 {
-  SKSpriteNode *ball = [Images nodeFromImage:[Images imageOfBall]];
+  SKSpriteNode *ball = [BBImages nodeFromImage:[BBImages imageOfBall]];
   ball.name = @"ball";
   ball.position = position;
   ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball.size.width * 0.5];

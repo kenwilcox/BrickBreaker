@@ -9,7 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "BBImages.h"
 
-@interface Images (SpriteKitLoader)
+@interface BBImages (SpriteKitLoader)
 
 + (SKTexture*)brickTextureOfColor:(UIColor*)color;
 + (SKSpriteNode*)brickOfColor:(UIColor*)color;

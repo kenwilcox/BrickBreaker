@@ -7,8 +7,8 @@
 //
 
 #import "BBBrick.h"
-#import "Images.h"
-#import "Images+SpriteKit.h"
+#import "BBImages.h"
+#import "BBImages+SpriteKit.h"
 
 @implementation BBBrick
 
@@ -23,22 +23,22 @@
   
   switch (type) {
     case Purple:
-      self = [super initWithTexture:[Images brickTextureOfColor:purpleBrickColor]];
+      self = [super initWithTexture:[BBImages brickTextureOfColor:purpleBrickColor]];
       break;
     case Red:
-      self = [super initWithTexture:[Images brickTextureOfColor:redBrickColor]];
+      self = [super initWithTexture:[BBImages brickTextureOfColor:redBrickColor]];
       break;
     case Yellow:
-      self = [super initWithTexture:[Images brickTextureOfColor:yellowBrickColor]];
+      self = [super initWithTexture:[BBImages brickTextureOfColor:yellowBrickColor]];
       break;
     case Green:
-      self = [super initWithTexture:[Images brickTextureOfColor:greenBrickColor]];
+      self = [super initWithTexture:[BBImages brickTextureOfColor:greenBrickColor]];
       break;
     case Blue:
-      self = [super initWithTexture:[Images brickTextureOfColor:blueBrickColor]];
+      self = [super initWithTexture:[BBImages brickTextureOfColor:blueBrickColor]];
       break;
     case Gray:
-      self = [super initWithTexture:[Images brickTextureOfColor:grayBrickColor]];
+      self = [super initWithTexture:[BBImages brickTextureOfColor:grayBrickColor]];
       break;
     default:
       self = nil;

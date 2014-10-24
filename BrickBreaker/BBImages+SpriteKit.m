@@ -8,16 +8,16 @@
 
 #import "BBImages+SpriteKit.h"
 
-@implementation Images (SpriteKitLoader)
+@implementation BBImages (SpriteKitLoader)
 
 + (SKTexture*)brickTextureOfColor:(UIColor*)color
 {
-  return [SKTexture textureWithImage:[Images imageOfBrickWithBrickColor:color]];
+  return [SKTexture textureWithImage:[BBImages imageOfBrickWithBrickColor:color]];
 }
 
 + (SKSpriteNode*)brickOfColor:(UIColor*)color
 {
-  UIImage *image = [Images imageOfBrickWithBrickColor:color];
+  UIImage *image = [BBImages imageOfBrickWithBrickColor:color];
   return [self nodeFromImage:image];
 }
 
