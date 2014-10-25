@@ -170,7 +170,9 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
   
   // Ball and Brick
   if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kBrickCategory) {
-    [secondBody.node runAction:[SKAction removeFromParent]];
+    if ([secondBody.node respondsToSelector:@selector(hit)]) {
+      [secondBody.node performSelector:@selector(hit)];
+    }
   }
   
 }
