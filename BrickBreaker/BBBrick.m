@@ -11,15 +11,23 @@
 #import "BBImages+SpriteKit.h"
 
 @implementation BBBrick
+{
+  UIColor *purpleBrickColor;
+  UIColor *redBrickColor;
+  UIColor *yellowBrickColor;
+  UIColor *greenBrickColor;
+  UIColor *blueBrickColor;
+  UIColor *grayBrickColor;
+}
 
 - (instancetype)initWithType:(BrickType)type
 {
-  UIColor *purpleBrickColor = [UIColor colorWithRed:0.435 green:0.263 blue:0.512 alpha:1];
-  UIColor *redBrickColor = [UIColor colorWithRed:0.924 green:0.118 blue:0.166 alpha:1];
-  UIColor *yellowBrickColor = [UIColor colorWithRed:0.995 green:0.764 blue:0.037 alpha:1];
-  UIColor *greenBrickColor = [UIColor colorWithRed:0.561 green:0.780 blue:0.149 alpha:1];
-  UIColor *blueBrickColor = [UIColor colorWithRed:0.244 green:0.694 blue:0.925 alpha:1];
-  UIColor *grayBrickColor = [UIColor colorWithRed:0.756 green:0.756 blue:0.756 alpha:1];
+  purpleBrickColor = [UIColor colorWithRed:0.435 green:0.263 blue:0.512 alpha:1];
+  redBrickColor = [UIColor colorWithRed:0.924 green:0.118 blue:0.166 alpha:1];
+  yellowBrickColor = [UIColor colorWithRed:0.995 green:0.764 blue:0.037 alpha:1];
+  greenBrickColor = [UIColor colorWithRed:0.561 green:0.780 blue:0.149 alpha:1];
+  blueBrickColor = [UIColor colorWithRed:0.244 green:0.694 blue:0.925 alpha:1];
+  grayBrickColor = [UIColor colorWithRed:0.756 green:0.756 blue:0.756 alpha:1];
   
   switch (type) {
     case Purple:
@@ -49,9 +57,28 @@
     self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.size];
     self.physicsBody.categoryBitMask = kBrickCategory;
     self.physicsBody.dynamic = NO;
+    self.type = type;
   }
   
   return self;
+}
+
+-(void)hit
+{
+  switch (self.type) {
+    case Green:
+      [self runAction:[SKAction removeFromParent]];
+      break;
+    case Blue:
+      self.texture = [BBImages brickTextureOfColor:greenBrickColor];
+      self.type = Green;
+      break;
+    case Gray:
+      break;
+    default:
+      [self runAction:[SKAction removeFromParent]];
+      break;
+  }
 }
 
 @end
