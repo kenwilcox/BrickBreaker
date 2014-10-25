@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BE4FEEF519F9B8F900970903 /* BBBrick.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4FEEF419F9B8F900970903 /* BBBrick.m */; };
 		BE4FEEF819F9BBE900970903 /* BBImages+SpriteKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4FEEF719F9BBE900970903 /* BBImages+SpriteKit.m */; };
+		BE4FEEFA19FC35AA00970903 /* 0.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEEF919FC35AA00970903 /* 0.json */; };
+		BE4FEEFC19FC37CB00970903 /* allBricks.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEEFB19FC37CB00970903 /* allBricks.json */; };
 		BE843D8A19F5768C00298057 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8919F5768C00298057 /* Foundation.framework */; };
 		BE843D8C19F5768C00298057 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8B19F5768C00298057 /* CoreGraphics.framework */; };
 		BE843D8E19F5768C00298057 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8D19F5768C00298057 /* UIKit.framework */; };
@@ -44,6 +46,8 @@
 		BE4FEEF419F9B8F900970903 /* BBBrick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBrick.m; sourceTree = "<group>"; };
 		BE4FEEF619F9BBE900970903 /* BBImages+SpriteKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BBImages+SpriteKit.h"; sourceTree = "<group>"; };
 		BE4FEEF719F9BBE900970903 /* BBImages+SpriteKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BBImages+SpriteKit.m"; sourceTree = "<group>"; };
+		BE4FEEF919FC35AA00970903 /* 0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 0.json; sourceTree = "<group>"; };
+		BE4FEEFB19FC37CB00970903 /* allBricks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allBricks.json; sourceTree = "<group>"; };
 		BE843D8619F5768C00298057 /* BrickBreaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickBreaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE843D8919F5768C00298057 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE843D8B19F5768C00298057 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -146,6 +150,8 @@
 				BE843DA419F5768C00298057 /* BBMyScene.m */,
 				BE843DA819F5768C00298057 /* Images.xcassets */,
 				BE843D9219F5768C00298057 /* Supporting Files */,
+				BE4FEEF919FC35AA00970903 /* 0.json */,
+				BE4FEEFB19FC37CB00970903 /* allBricks.json */,
 			);
 			path = BrickBreaker;
 			sourceTree = "<group>";
@@ -256,10 +262,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4FEEFA19FC35AA00970903 /* 0.json in Resources */,
 				BE843D9619F5768C00298057 /* InfoPlist.strings in Resources */,
 				BE843DCD19F5787700298057 /* README.md in Resources */,
 				BE843DA919F5768C00298057 /* Images.xcassets in Resources */,
 				BE843D9F19F5768C00298057 /* Main.storyboard in Resources */,
+				BE4FEEFC19FC37CB00970903 /* allBricks.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

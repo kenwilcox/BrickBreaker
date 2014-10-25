@@ -41,8 +41,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     _brickLayer = [SKNode node];
     _brickLayer.position = CGPointMake(0, self.size.height);
     [self addChild:_brickLayer];
-    //[self loadAllBrickLevel];
-    [self loadLevel:0];
+    [self loadLevel:@"allBricks"];
     
     // Turn off gravity
     self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
@@ -64,59 +63,33 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 
 #pragma mark Generators
 
-- (void)loadLevel:(int)levelNumber
+- (void)loadLevel:(NSString *)levelName
 {
-  NSArray *level = nil;
-  switch (levelNumber) {
-    case 0:
-      level = @[@[@4,@4,@4,@4,@4,@4],
-                @[@4,@4,@4,@4,@4,@4],
-                @[@0,@0,@0,@0,@0,@0],
-                @[@0,@0,@0,@0,@0,@0],
-                @[@5,@5,@5,@5,@5,@5]];
-      break;
-    default:
-      break;
-  }
-  
-  int row = 0;
-  int col = 0;
-  for (NSArray *rowBricks in level) {
-    col = 0;
-    for (NSNumber *brickType in rowBricks) {
-      if ([brickType intValue] > 0) {
-        BBBrick *brick = [[BBBrick alloc] initWithType:(BrickType)[brickType intValue]];
-        if (brick) {
-          brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
-                                       , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
-          [_brickLayer addChild:brick];
+  NSURL *filePath = [[NSBundle mainBundle] URLForResource:levelName withExtension:@"json"];
+  NSData *data = [[NSFileManager defaultManager] contentsAtPath:[filePath path]];
+  NSError *error;
+  NSMutableArray *level = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+  if (!error) {
+    int row = 0;
+    int col = 0;
+    // Maybe this should be for and not for in, limit rows and columns...
+    for (NSArray *rowBricks in level) {
+      col = 0;
+      for (NSNumber *brickType in rowBricks) {
+        if ([brickType intValue] > 0) {
+          BBBrick *brick = [[BBBrick alloc] initWithType:(BrickType)[brickType intValue]];
+          if (brick) {
+            brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
+                                         , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
+            [_brickLayer addChild:brick];
+          }
         }
+        col++;
       }
-      col++;
+      row++;
     }
-    row++;
-  }
-}
-
-- (void)loadAllBrickLevel
-{
-  for (int row = 0; row < 5; row++) {
-    for (int col = 0; col < 6; col++) {
-      BBBrick *brick;
-      switch(col) {
-        case 0: brick = [[BBBrick alloc] initWithType:Purple];break;
-        case 1: brick = [[BBBrick alloc] initWithType:Red];break;
-        case 2: brick = [[BBBrick alloc] initWithType:Yellow];break;
-        case 3: brick = [[BBBrick alloc] initWithType:Green];break;
-        case 4: brick = [[BBBrick alloc] initWithType:Blue];break;
-        case 5: brick = [[BBBrick alloc] initWithType:Gray];break;
-      }
-      
-      brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
-                                   , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
-      
-      [_brickLayer addChild:brick];
-    }
+  } else {
+    NSLog(@"JSONObjectWithData error: %@", error);
   }
 }
 
