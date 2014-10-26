@@ -17,6 +17,7 @@
   CGPoint _touchLocation;
   CGFloat _ballSpeed;
   SKNode *_brickLayer;
+  BOOL _ballReleased;
 }
 
 static const uint32_t kBallCategory = 0x1 << 0;
@@ -29,20 +30,6 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     
     self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
     
-    // Setup the paddle
-    _paddle = [BBImages nodeFromImage:[BBImages imageOfPaddle]];
-    _paddle.position = CGPointMake(self.size.width * 0.5, 90);
-    _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
-    _paddle.physicsBody.dynamic = NO;
-    _paddle.physicsBody.categoryBitMask = kPaddleCategory;
-    [self addChild:_paddle];
-    
-    // Setup brick layer
-    _brickLayer = [SKNode node];
-    _brickLayer.position = CGPointMake(0, self.size.height);
-    [self addChild:_brickLayer];
-    [self loadLevel:@"allBricks"];
-    
     // Turn off gravity
     self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
     // Set contact delgate
@@ -51,12 +38,29 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     // Setup edge
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     
+    // Setup brick layer
+    _brickLayer = [SKNode node];
+    _brickLayer.position = CGPointMake(0, self.size.height);
+    [self addChild:_brickLayer];
+    [self loadLevel:@"0"];
+    
+    // Setup the paddle
+    _paddle = [BBImages nodeFromImage:[BBImages imageOfPaddle]];
+    _paddle.position = CGPointMake(self.size.width * 0.5, 90);
+    _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
+    _paddle.physicsBody.dynamic = NO;
+    _paddle.physicsBody.categoryBitMask = kPaddleCategory;
+    [self addChild:_paddle];
+
+    // Create positioning ball
+    SKSpriteNode *ball = [BBImages nodeFromImage:[BBImages imageOfBall]];
+    ball.position = CGPointMake(0, _paddle.size.height);
+    [_paddle addChild:ball];
+    
     // Setup initial values
     _ballSpeed = 250.0;
-    
-    [self createBallWithLocation:CGPointMake(self.size.width * 0.5, self.size.height * 0.5)
-                     andVelocity:CGVectorMake(40, 180)];
-    
+    _ballReleased = NO;
+
   }
   return self;
 }
@@ -111,9 +115,17 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 
 #pragma mark SKNode Receivers
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  if (!_ballReleased) {
+    _ballReleased = YES;
+    [_paddle removeAllChildren];
+    [self createBallWithLocation:CGPointMake(_paddle.position.x, _paddle.position.y + _paddle.size.height) andVelocity:CGVectorMake(0, _ballSpeed)];
+  }
+}
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-  /* Called when a touch begins */
   for (UITouch *touch in touches) {
     _touchLocation = [touch locationInNode:self];
   }
