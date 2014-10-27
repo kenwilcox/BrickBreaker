@@ -51,6 +51,7 @@
     self.physicsBody.categoryBitMask = kBrickCategory;
     self.physicsBody.dynamic = NO;
     self.type = type;
+    self.indestructible = (type == Gray);
   }
   
   return self;

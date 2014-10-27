@@ -42,7 +42,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     _brickLayer = [SKNode node];
     _brickLayer.position = CGPointMake(0, self.size.height);
     [self addChild:_brickLayer];
-    [self loadLevel:@"0"];
+    [self loadLevelNumber:1];
     
     // Setup the paddle
     _paddle = [BBImages nodeFromImage:[BBImages imageOfPaddle]];
@@ -66,6 +66,11 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 }
 
 #pragma mark Generators
+
+- (void)loadLevelNumber:(int)levelNumber
+{
+  [self loadLevel:[@(levelNumber) stringValue]];
+}
 
 - (void)loadLevel:(NSString *)levelName
 {
