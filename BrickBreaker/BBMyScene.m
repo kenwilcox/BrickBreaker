@@ -29,6 +29,7 @@
 
 static const uint32_t kBallCategory = 0x1 << 0;
 static const uint32_t kPaddleCategory = 0x1 << 1;
+static NSString * const kKeyBall = @"ball";
 
 - (id)initWithSize:(CGSize)size
 {
@@ -78,7 +79,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     _ballSpeed = 250.0;
     _ballReleased = NO;
     _currentLevel = 0;
-    self.lives = 1;
+    self.lives = 2;
     
     [self loadLevelNumber:_currentLevel];
     [self newBall];
@@ -141,6 +142,8 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     } else {
       NSLog(@"JSONObjectWithData error: %@", error);
     }
+  } else {
+    _currentLevel = -1;
   }
 }
 
@@ -162,7 +165,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 
 - (void)newBall
 {
-  [self enumerateChildNodesWithName:@"ball" usingBlock:^(SKNode *node, BOOL *stop) {
+  [self enumerateChildNodesWithName:kKeyBall usingBlock:^(SKNode *node, BOOL *stop) {
     [node removeFromParent];
   }];
   
@@ -177,7 +180,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 - (SKSpriteNode*)createBallWithLocation:(CGPoint)position andVelocity:(CGVector)velocity
 {
   SKSpriteNode *ball = [BBImages nodeFromImage:[BBImages imageOfBall]];
-  ball.name = @"ball";
+  ball.name = kKeyBall;
   ball.position = position;
   ball.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball.size.width * 0.5];
   ball.physicsBody.friction = 0.0;
@@ -239,11 +242,36 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
   /* Called before each frame is rendered */
   if ([self isLevelComplete]) {
     _currentLevel++;
-    if (_currentLevel < 4) {
+    if (_currentLevel > 2) {
+      _currentLevel = 0;
+      self.lives = 2;
+    }
+    //if (_currentLevel < 4) {
       [self loadLevelNumber:_currentLevel];
       [self newBall];
+    //}
+  } else if (_ballReleased && !_positionBall && ![self childNodeWithName:kKeyBall]) {
+    // Lost all balls
+    self.lives--;
+    if (self.lives < 0) {
+      self.lives = 2;
+      _currentLevel = 0;
+      [self loadLevelNumber:_currentLevel];
     }
+    [self newBall];
   }
+}
+
+#pragma mark SKScene overrides
+
+-(void)didSimulatePhysics
+{
+  [self enumerateChildNodesWithName:kKeyBall usingBlock:^(SKNode *node, BOOL *stop) {
+    if (node.frame.origin.y + node.frame.size.height < 0) {
+      // Lost ball
+      [node removeFromParent];
+    }
+  }];
 }
 
 #pragma mark SKPhysicsContactDelegates
