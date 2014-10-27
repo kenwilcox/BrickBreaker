@@ -18,6 +18,7 @@
   CGFloat _ballSpeed;
   SKNode *_brickLayer;
   BOOL _ballReleased;
+  BOOL _positionBall;
   int _currentLevel;
 }
 
@@ -156,7 +157,8 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-  if (!_ballReleased) {
+  if (_positionBall) {
+    _positionBall = NO;
     _ballReleased = YES;
     [_paddle removeAllChildren];
     [self createBallWithLocation:CGPointMake(_paddle.position.x, _paddle.position.y + _paddle.size.height) andVelocity:CGVectorMake(0, _ballSpeed)];
@@ -166,6 +168,9 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
   for (UITouch *touch in touches) {
+    if (!_ballReleased) {
+      _positionBall = YES;
+    }
     _touchLocation = [touch locationInNode:self];
   }
 }
