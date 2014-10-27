@@ -11,6 +11,10 @@
 #import "BBImages+SpriteKit.h"
 #import "BBBrick.h"
 
+@interface BBMyScene()
+@property (nonatomic) int lives;
+@end
+
 @implementation BBMyScene
 {
   SKSpriteNode *_paddle;
@@ -20,6 +24,7 @@
   BOOL _ballReleased;
   BOOL _positionBall;
   int _currentLevel;
+  NSArray *_hearts;
 }
 
 static const uint32_t kBallCategory = 0x1 << 0;
@@ -38,12 +43,28 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     self.physicsWorld.contactDelegate = self;
     
     // Setup edge
-    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(0, -128, size.width, size.height + 100)];
+    
+    // Add HUD bar
+    SKSpriteNode *bar = [SKSpriteNode spriteNodeWithColor:[SKColor blackColor] size:CGSizeMake(size.width, 28)];
+    bar.position = CGPointMake(0, size.height);
+    bar.anchorPoint = CGPointMake(0, 1);
+    [self addChild:bar];
     
     // Setup brick layer
     _brickLayer = [SKNode node];
-    _brickLayer.position = CGPointMake(0, self.size.height);
+    _brickLayer.position = CGPointMake(0, self.size.height -28);
     [self addChild:_brickLayer];
+    
+    // Setup hearts
+    _hearts = @[[BBImages nodeFromImage:[BBImages imageOfHeartFull]],
+                [BBImages nodeFromImage:[BBImages imageOfHeartFull]]];
+    for (NSUInteger i = 0; i < _hearts.count; i++) {
+      SKSpriteNode *heart = (SKSpriteNode*)_hearts[i];
+      heart.size = CGSizeMake(26.0, 22.0);
+      heart.position = CGPointMake(self.size.width - (16 + (29 * i)), self.size.height - 14);
+      [self addChild:heart];
+    }
     
     // Setup the paddle
     _paddle = [BBImages nodeFromImage:[BBImages imageOfPaddle]];
@@ -57,12 +78,28 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     _ballSpeed = 250.0;
     _ballReleased = NO;
     _currentLevel = 0;
+    self.lives = 1;
     
     [self loadLevelNumber:_currentLevel];
     [self newBall];
 
   }
   return self;
+}
+
+#pragma mark Setters
+
+-(void)setLives:(int)lives
+{
+  _lives = lives;
+  for (NSUInteger i = 0; i < _hearts.count; i++) {
+    SKSpriteNode *heart = (SKSpriteNode*)_hearts[i];
+    if (lives > i) {
+      heart.texture = [SKTexture textureWithImage:[BBImages imageOfHeartFull]];
+    } else {
+      heart.texture = [SKTexture textureWithImage:[BBImages imageOfHeartEmpty]];
+    }
+  }
 }
 
 #pragma mark Game Methods
