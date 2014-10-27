@@ -7,46 +7,39 @@
 //
 
 #import "BBBrick.h"
+#import "BBBrickColor.h"
 #import "BBImages.h"
 #import "BBImages+SpriteKit.h"
 
 @implementation BBBrick
 {
-  UIColor *purpleBrickColor;
-  UIColor *redBrickColor;
-  UIColor *yellowBrickColor;
-  UIColor *greenBrickColor;
-  UIColor *blueBrickColor;
-  UIColor *grayBrickColor;
 }
 
 - (instancetype)initWithType:(BrickType)type
 {
-  purpleBrickColor = [UIColor colorWithRed:0.435 green:0.263 blue:0.512 alpha:1];
-  redBrickColor = [UIColor colorWithRed:0.924 green:0.118 blue:0.166 alpha:1];
-  yellowBrickColor = [UIColor colorWithRed:0.995 green:0.764 blue:0.037 alpha:1];
-  greenBrickColor = [UIColor colorWithRed:0.561 green:0.780 blue:0.149 alpha:1];
-  blueBrickColor = [UIColor colorWithRed:0.244 green:0.694 blue:0.925 alpha:1];
-  grayBrickColor = [UIColor colorWithRed:0.756 green:0.756 blue:0.756 alpha:1];
+  // http://blog.wilshipley.com/2005/07/code-insults-mark-i.html
+  if (![super initWithTexture:[BBImages brickTextureOfColor:[UIColor grayBrickColor]]])
+    return nil;
   
   switch (type) {
     case Purple:
-      self = [super initWithTexture:[BBImages brickTextureOfColor:purpleBrickColor]];
+      self.texture = [BBImages brickTextureOfColor:[UIColor purpleBrickColor]];
       break;
     case Red:
-      self = [super initWithTexture:[BBImages brickTextureOfColor:redBrickColor]];
+      self.texture = [BBImages brickTextureOfColor:[UIColor redBrickColor]];
       break;
     case Yellow:
-      self = [super initWithTexture:[BBImages brickTextureOfColor:yellowBrickColor]];
+      self.texture = [BBImages brickTextureOfColor:[UIColor yellowBrickColor]];
       break;
     case Green:
-      self = [super initWithTexture:[BBImages brickTextureOfColor:greenBrickColor]];
+      self.texture = [BBImages brickTextureOfColor:[UIColor greenBrickColor]];
       break;
     case Blue:
-      self = [super initWithTexture:[BBImages brickTextureOfColor:blueBrickColor]];
+      self.texture = [BBImages brickTextureOfColor:[UIColor blueBrickColor]];
       break;
     case Gray:
-      self = [super initWithTexture:[BBImages brickTextureOfColor:grayBrickColor]];
+      // Not necessary - already done
+      //self.texture = [BBImages brickTextureOfColor:[UIColor grayBrickColor]];
       break;
     default:
       self = nil;
@@ -70,7 +63,7 @@
       [self runAction:[SKAction removeFromParent]];
       break;
     case Blue:
-      self.texture = [BBImages brickTextureOfColor:greenBrickColor];
+      self.texture = [BBImages brickTextureOfColor:[UIColor greenBrickColor]];
       self.type = Green;
       break;
     case Gray:
