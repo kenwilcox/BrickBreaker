@@ -22,6 +22,7 @@ static const uint32_t kBrickCategory = 0x1 << 2;
 @interface BBBrick : SKSpriteNode
 
 @property (nonatomic) BrickType type;
+@property (nonatomic) SKTexture* initialTexture;
 @property (nonatomic) BOOL indestructible;
 
 - (instancetype)initWithType:(BrickType)type;

@@ -15,6 +15,8 @@
 		BE4FEF0119FDFCC200970903 /* -1.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0019FDFCC200970903 /* -1.json */; };
 		BE4FEF0319FDFEC500970903 /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0219FDFEC500970903 /* 2.json */; };
 		BE4FEF0519FDFF0F00970903 /* 3.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0419FDFF0F00970903 /* 3.json */; };
+		BE4FEF0E19FE27E000970903 /* BrickExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0C19FE27E000970903 /* BrickExplosion.sks */; };
+		BE4FEF0F19FE27E000970903 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0D19FE27E000970903 /* spark.png */; };
 		BE843D8A19F5768C00298057 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8919F5768C00298057 /* Foundation.framework */; };
 		BE843D8C19F5768C00298057 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8B19F5768C00298057 /* CoreGraphics.framework */; };
 		BE843D8E19F5768C00298057 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8D19F5768C00298057 /* UIKit.framework */; };
@@ -57,6 +59,8 @@
 		BE4FEF0019FDFCC200970903 /* -1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "-1.json"; sourceTree = "<group>"; };
 		BE4FEF0219FDFEC500970903 /* 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 2.json; sourceTree = "<group>"; };
 		BE4FEF0419FDFF0F00970903 /* 3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 3.json; sourceTree = "<group>"; };
+		BE4FEF0C19FE27E000970903 /* BrickExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrickExplosion.sks; sourceTree = "<group>"; };
+		BE4FEF0D19FE27E000970903 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		BE843D8619F5768C00298057 /* BrickBreaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickBreaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE843D8919F5768C00298057 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE843D8B19F5768C00298057 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -159,6 +163,8 @@
 				BE4FEEFE19FDF8FC00970903 /* BBBrickColor.m */,
 				BE843DA319F5768C00298057 /* BBMyScene.h */,
 				BE843DA419F5768C00298057 /* BBMyScene.m */,
+				BE4FEF0C19FE27E000970903 /* BrickExplosion.sks */,
+				BE4FEF0D19FE27E000970903 /* spark.png */,
 				BE843DA819F5768C00298057 /* Images.xcassets */,
 				BE843D9219F5768C00298057 /* Supporting Files */,
 				BE4FEEF919FC35AA00970903 /* 1.json */,
@@ -276,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4FEF0F19FE27E000970903 /* spark.png in Resources */,
 				BE4FEEFA19FC35AA00970903 /* 1.json in Resources */,
 				BE4FEF0119FDFCC200970903 /* -1.json in Resources */,
 				BE4FEF0519FDFF0F00970903 /* 3.json in Resources */,
@@ -283,6 +290,7 @@
 				BE843DCD19F5787700298057 /* README.md in Resources */,
 				BE843DA919F5768C00298057 /* Images.xcassets in Resources */,
 				BE843D9F19F5768C00298057 /* Main.storyboard in Resources */,
+				BE4FEF0E19FE27E000970903 /* BrickExplosion.sks in Resources */,
 				BE4FEEFC19FC37CB00970903 /* allBricks.json in Resources */,
 				BE4FEF0319FDFEC500970903 /* 2.json in Resources */,
 			);

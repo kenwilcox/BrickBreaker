@@ -23,23 +23,22 @@
   
   switch (type) {
     case Purple:
-      self.texture = [BBImages brickTextureOfColor:[UIColor purpleBrickColor]];
+      self.color = [UIColor purpleBrickColor];
       break;
     case Red:
-      self.texture = [BBImages brickTextureOfColor:[UIColor redBrickColor]];
+      self.color = [UIColor redBrickColor];
       break;
     case Yellow:
-      self.texture = [BBImages brickTextureOfColor:[UIColor yellowBrickColor]];
+      self.color = [UIColor yellowBrickColor];
       break;
     case Green:
-      self.texture = [BBImages brickTextureOfColor:[UIColor greenBrickColor]];
+      self.color = [UIColor greenBrickColor];
       break;
     case Blue:
-      self.texture = [BBImages brickTextureOfColor:[UIColor blueBrickColor]];
+      self.color = [UIColor blueBrickColor];
       break;
     case Gray:
-      // Not necessary - already done
-      //self.texture = [BBImages brickTextureOfColor:[UIColor grayBrickColor]];
+      self.color = [UIColor grayBrickColor];
       break;
     default:
       self = nil;
@@ -47,20 +46,23 @@
   }
   
   if (self) {
+    self.texture = [BBImages brickTextureOfColor:self.color];
     self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.size];
     self.physicsBody.categoryBitMask = kBrickCategory;
     self.physicsBody.dynamic = NO;
     self.type = type;
+    self.initialTexture = self.texture;
     self.indestructible = (type == Gray);
   }
   
   return self;
 }
 
--(void)hit
+- (void)hit
 {
   switch (self.type) {
     case Green:
+      [self createExplosion];
       [self runAction:[SKAction removeFromParent]];
       break;
     case Blue:
@@ -73,6 +75,46 @@
       [self runAction:[SKAction removeFromParent]];
       break;
   }
+}
+
+- (void)createExplosion
+{
+//  NSString *path = [[NSBundle mainBundle] pathForResource:@"BrickExplosion" ofType:@"sks"];
+//  SKEmitterNode *explosion = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+//  explosion.particleTexture = self.texture;
+  
+  SKEmitterNode *explosion = [SKEmitterNode node];
+  explosion.particleTexture = self.initialTexture;
+  
+  explosion.particleBirthRate = 100;
+  explosion.numParticlesToEmit = 10;
+  
+  explosion.particleLifetime = 1;
+  explosion.particleLifetimeRange = 0;
+  
+  explosion.position = CGPointMake(50, 25);
+  explosion.emissionAngle = 89.954;
+  explosion.emissionAngleRange = 360.39;
+  
+  explosion.particleSpeed = 100;
+  explosion.particleSpeedRange = 50;
+  
+  explosion.xAcceleration = 0;
+  explosion.yAcceleration = -1000;
+  
+  explosion.particleScale = 0.2;
+  explosion.particleScaleRange = 0.2;
+  explosion.particleScaleSpeed = -0.4;
+  
+  explosion.particleColorSequence = nil;
+  explosion.particleColor = self.color;
+  explosion.particleBlendMode = SKBlendModeAlpha;
+  
+  explosion.position = self.position;
+  [self.parent addChild:explosion];
+  
+  SKAction *removeExplosion = [SKAction sequence:@[[SKAction waitForDuration:explosion.particleLifetime + explosion.particleLifetimeRange], [SKAction removeFromParent]]];
+  [explosion runAction:removeExplosion];
 }
 
 @end
