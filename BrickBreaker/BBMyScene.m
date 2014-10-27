@@ -18,6 +18,7 @@
   CGFloat _ballSpeed;
   SKNode *_brickLayer;
   BOOL _ballReleased;
+  int _currentLevel;
 }
 
 static const uint32_t kBallCategory = 0x1 << 0;
@@ -42,7 +43,6 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     _brickLayer = [SKNode node];
     _brickLayer.position = CGPointMake(0, self.size.height);
     [self addChild:_brickLayer];
-    [self loadLevelNumber:1];
     
     // Setup the paddle
     _paddle = [BBImages nodeFromImage:[BBImages imageOfPaddle]];
@@ -51,21 +51,20 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
     _paddle.physicsBody.dynamic = NO;
     _paddle.physicsBody.categoryBitMask = kPaddleCategory;
     [self addChild:_paddle];
-
-    // Create positioning ball
-    SKSpriteNode *ball = [BBImages nodeFromImage:[BBImages imageOfBall]];
-    ball.position = CGPointMake(0, _paddle.size.height);
-    [_paddle addChild:ball];
     
     // Setup initial values
     _ballSpeed = 250.0;
     _ballReleased = NO;
+    _currentLevel = 0;
+    
+    [self loadLevelNumber:_currentLevel];
+    [self newBall];
 
   }
   return self;
 }
 
-#pragma mark Generators
+#pragma mark Game Methods
 
 - (void)loadLevelNumber:(int)levelNumber
 {
@@ -74,32 +73,67 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 
 - (void)loadLevel:(NSString *)levelName
 {
+  [_brickLayer removeAllChildren];
+  
   NSURL *filePath = [[NSBundle mainBundle] URLForResource:levelName withExtension:@"json"];
-  NSData *data = [[NSFileManager defaultManager] contentsAtPath:[filePath path]];
-  NSError *error;
-  NSMutableArray *level = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-  if (!error) {
-    int row = 0;
-    int col = 0;
-    // Maybe this should be for and not for in, limit rows and columns...
-    for (NSArray *rowBricks in level) {
-      col = 0;
-      for (NSNumber *brickType in rowBricks) {
-        if ([brickType intValue] > 0) {
-          BBBrick *brick = [[BBBrick alloc] initWithType:(BrickType)[brickType intValue]];
-          if (brick) {
-            brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
-                                         , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
-            [_brickLayer addChild:brick];
+  if (filePath) {
+    NSData *data = [[NSFileManager defaultManager] contentsAtPath:[filePath path]];
+    NSError *error;
+    NSMutableArray *level = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+    
+    if (!error) {
+      int row = 0;
+      int col = 0;
+      // Maybe this should be for and not for in, limit rows and columns...
+      for (NSArray *rowBricks in level) {
+        col = 0;
+        for (NSNumber *brickType in rowBricks) {
+          if ([brickType intValue] > 0) {
+            BBBrick *brick = [[BBBrick alloc] initWithType:(BrickType)[brickType intValue]];
+            if (brick) {
+              brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
+                                           , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
+              [_brickLayer addChild:brick];
+            }
           }
+          col++;
         }
-        col++;
+        row++;
       }
-      row++;
+    } else {
+      NSLog(@"JSONObjectWithData error: %@", error);
     }
-  } else {
-    NSLog(@"JSONObjectWithData error: %@", error);
   }
+}
+
+- (BOOL)isLevelComplete
+{
+  // Look for remaining bricks that are not indestructible
+  for (SKNode *node in _brickLayer.children) {
+    if ([node isKindOfClass:[BBBrick class]]) {
+      if (!((BBBrick*)node).indestructible) {
+        return NO;
+      }
+    }
+  }
+  // Couldn't find any non-indestructible bricks
+  return YES;
+}
+
+#pragma mark Generators
+
+- (void)newBall
+{
+  [self enumerateChildNodesWithName:@"ball" usingBlock:^(SKNode *node, BOOL *stop) {
+    [node removeFromParent];
+  }];
+  
+  // Create positioning ball
+  SKSpriteNode *ball = [BBImages nodeFromImage:[BBImages imageOfBall]];
+  ball.position = CGPointMake(0, _paddle.size.height);
+  [_paddle addChild:ball];
+  _ballReleased = NO;
+  _paddle.position = CGPointMake(self.size.width * 0.5, _paddle.position.y);
 }
 
 - (SKSpriteNode*)createBallWithLocation:(CGPoint)position andVelocity:(CGVector)velocity
@@ -161,6 +195,13 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 - (void)update:(CFTimeInterval)currentTime
 {
   /* Called before each frame is rendered */
+  if ([self isLevelComplete]) {
+    _currentLevel++;
+    if (_currentLevel < 4) {
+      [self loadLevelNumber:_currentLevel];
+      [self newBall];
+    }
+  }
 }
 
 #pragma mark SKPhysicsContactDelegates
