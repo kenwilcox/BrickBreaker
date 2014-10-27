@@ -13,23 +13,25 @@
 
 @interface BBMyScene()
 @property (nonatomic) int lives;
+@property (nonatomic) int currentLevel;
 @end
 
 @implementation BBMyScene
 {
   SKSpriteNode *_paddle;
+  SKLabelNode *_levelDisplay;
   CGPoint _touchLocation;
   CGFloat _ballSpeed;
   SKNode *_brickLayer;
   BOOL _ballReleased;
   BOOL _positionBall;
-  int _currentLevel;
   NSArray *_hearts;
 }
 
 static const uint32_t kBallCategory = 0x1 << 0;
 static const uint32_t kPaddleCategory = 0x1 << 1;
 static NSString * const kKeyBall = @"ball";
+static const int kFinalLevelNumber = 3;
 
 - (id)initWithSize:(CGSize)size
 {
@@ -51,6 +53,16 @@ static NSString * const kKeyBall = @"ball";
     bar.position = CGPointMake(0, size.height);
     bar.anchorPoint = CGPointMake(0, 1);
     [self addChild:bar];
+    
+    // Setup level display
+    _levelDisplay = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+//    _levelDisplay.text = @"LEVEL 1";
+    _levelDisplay.fontColor = [SKColor whiteColor];
+    _levelDisplay.fontSize = 15;
+    _levelDisplay.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+    _levelDisplay.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
+    _levelDisplay.position = CGPointMake(10, -10);
+    [bar addChild:_levelDisplay];
     
     // Setup brick layer
     _brickLayer = [SKNode node];
@@ -78,10 +90,10 @@ static NSString * const kKeyBall = @"ball";
     // Setup initial values
     _ballSpeed = 250.0;
     _ballReleased = NO;
-    _currentLevel = 0;
+    self.currentLevel = 1;
     self.lives = 2;
     
-    [self loadLevelNumber:_currentLevel];
+    [self loadLevelNumber:self.currentLevel];
     [self newBall];
 
   }
@@ -90,7 +102,7 @@ static NSString * const kKeyBall = @"ball";
 
 #pragma mark Setters
 
--(void)setLives:(int)lives
+- (void)setLives:(int)lives
 {
   _lives = lives;
   for (NSUInteger i = 0; i < _hearts.count; i++) {
@@ -101,6 +113,12 @@ static NSString * const kKeyBall = @"ball";
       heart.texture = [SKTexture textureWithImage:[BBImages imageOfHeartEmpty]];
     }
   }
+}
+
+- (void)setCurrentLevel:(int)currentLevel
+{
+  _currentLevel = currentLevel;
+  _levelDisplay.text = [NSString stringWithFormat:@"LEVEL %d", currentLevel];
 }
 
 #pragma mark Game Methods
@@ -143,7 +161,7 @@ static NSString * const kKeyBall = @"ball";
       NSLog(@"JSONObjectWithData error: %@", error);
     }
   } else {
-    _currentLevel = -1;
+    self.currentLevel = 1;
   }
 }
 
@@ -241,22 +259,21 @@ static NSString * const kKeyBall = @"ball";
 {
   /* Called before each frame is rendered */
   if ([self isLevelComplete]) {
-    _currentLevel++;
-    if (_currentLevel > 2) {
-      _currentLevel = 0;
+    self.currentLevel++;
+    if (self.currentLevel > kFinalLevelNumber) {
+      self.currentLevel = 1;
       self.lives = 2;
     }
-    //if (_currentLevel < 4) {
-      [self loadLevelNumber:_currentLevel];
-      [self newBall];
-    //}
-  } else if (_ballReleased && !_positionBall && ![self childNodeWithName:kKeyBall]) {
+    [self loadLevelNumber:self.currentLevel];
+    [self newBall];
+  }
+  else if (_ballReleased && !_positionBall && ![self childNodeWithName:kKeyBall]) {
     // Lost all balls
     self.lives--;
     if (self.lives < 0) {
       self.lives = 2;
-      _currentLevel = 0;
-      [self loadLevelNumber:_currentLevel];
+      self.currentLevel = 1;
+      [self loadLevelNumber:self.currentLevel];
     }
     [self newBall];
   }
