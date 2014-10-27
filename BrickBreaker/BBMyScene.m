@@ -10,6 +10,7 @@
 #import "BBImages.h"
 #import "BBImages+SpriteKit.h"
 #import "BBBrick.h"
+#import "BBMenu.h"
 
 @interface BBMyScene()
 @property (nonatomic) int lives;
@@ -26,6 +27,7 @@
   BOOL _ballReleased;
   BOOL _positionBall;
   NSArray *_hearts;
+  BBMenu *_menu;
 }
 
 static const uint32_t kBallCategory = 0x1 << 0;
@@ -86,6 +88,11 @@ static const int kFinalLevelNumber = 3;
     _paddle.physicsBody.dynamic = NO;
     _paddle.physicsBody.categoryBitMask = kPaddleCategory;
     [self addChild:_paddle];
+    
+    // Setup menu
+    _menu = [[BBMenu alloc] init];
+    _menu.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
+    [self addChild:_menu];
     
     // Setup initial values
     _ballSpeed = 250.0;

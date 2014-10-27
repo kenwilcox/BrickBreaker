@@ -18,7 +18,8 @@
 - (instancetype)initWithType:(BrickType)type
 {
   // http://blog.wilshipley.com/2005/07/code-insults-mark-i.html
-  if (![super initWithTexture:[BBImages brickTextureOfColor:[UIColor grayBrickColor]]])
+  // http://blog.wilshipley.com/2005/07/self-stupid-init.html
+  if (!(self = [super initWithTexture:[BBImages brickTextureOfColor:[UIColor grayBrickColor]]]))
     return nil;
   
   switch (type) {
