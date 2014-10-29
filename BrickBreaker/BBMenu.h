@@ -8,6 +8,8 @@
 
 #import <SpriteKit/SpriteKit.h>
 
+static NSString * const kKeyPlayButton = @"Play Button";
+
 @interface BBMenu : SKNode
 
 @property (nonatomic) int levelNumber;

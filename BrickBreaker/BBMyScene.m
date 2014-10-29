@@ -258,7 +258,7 @@ static const int kFinalLevelNumber = 4;
     }
   } else {
     for (UITouch *touch in touches) {
-      if ([[_menu nodeAtPoint:[touch locationInNode:_menu]].name isEqualToString:@"Play Button"]) {
+      if ([[_menu nodeAtPoint:[touch locationInNode:_menu]].name isEqualToString:kKeyPlayButton]) {
         [_menu hide];
       }
     }

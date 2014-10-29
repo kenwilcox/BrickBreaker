@@ -37,13 +37,13 @@
     [_menuPanel addChild:_panelText];
     
     _playButton = [BBImages nodeFromImage:[BBImages imageOfButton]];
-    _playButton.name = @"Play Button";
+    _playButton.name = kKeyPlayButton;
     _playButton.size = CGSizeMake(142, 36.5);
     _playButton.position = CGPointMake(0, -((_menuPanel.size.height * 0.5) + (_playButton.size.height * 0.5) + 10));
     [self addChild:_playButton];
     
     _buttonText = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
-    _buttonText.name = @"Play Button";
+    _buttonText.name = kKeyPlayButton;
     _buttonText.text = @"PLAY";
     _buttonText.position = CGPointMake(0, 2);
     _buttonText.fontColor = [SKColor grayColor];
