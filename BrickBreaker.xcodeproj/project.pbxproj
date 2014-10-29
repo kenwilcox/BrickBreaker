@@ -36,6 +36,11 @@
 		BE843DBC19F5768C00298057 /* BrickBreakerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE843DBB19F5768C00298057 /* BrickBreakerTests.m */; };
 		BE843DCD19F5787700298057 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = BE843DCC19F5787700298057 /* README.md */; };
 		BE843DD019F7330D00298057 /* BBImages.m in Sources */ = {isa = PBXBuildFile; fileRef = BE843DCF19F7330D00298057 /* BBImages.m */; };
+		BEE3F4B71A00A58700F65D2B /* BallBounce.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B21A00A58700F65D2B /* BallBounce.caf */; };
+		BEE3F4B81A00A58700F65D2B /* BrickSmash.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B31A00A58700F65D2B /* BrickSmash.caf */; };
+		BEE3F4B91A00A58700F65D2B /* LevelUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B41A00A58700F65D2B /* LevelUp.caf */; };
+		BEE3F4BA1A00A58700F65D2B /* LoseLife.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B51A00A58700F65D2B /* LoseLife.caf */; };
+		BEE3F4BB1A00A58700F65D2B /* PaddleBounce.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B61A00A58700F65D2B /* PaddleBounce.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +94,11 @@
 		BE843DCC19F5787700298057 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BE843DCE19F7330D00298057 /* BBImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBImages.h; sourceTree = "<group>"; };
 		BE843DCF19F7330D00298057 /* BBImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBImages.m; sourceTree = "<group>"; };
+		BEE3F4B21A00A58700F65D2B /* BallBounce.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BallBounce.caf; sourceTree = "<group>"; };
+		BEE3F4B31A00A58700F65D2B /* BrickSmash.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BrickSmash.caf; sourceTree = "<group>"; };
+		BEE3F4B41A00A58700F65D2B /* LevelUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LevelUp.caf; sourceTree = "<group>"; };
+		BEE3F4B51A00A58700F65D2B /* LoseLife.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoseLife.caf; sourceTree = "<group>"; };
+		BEE3F4B61A00A58700F65D2B /* PaddleBounce.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaddleBounce.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +173,7 @@
 		BE843D9119F5768C00298057 /* BrickBreaker */ = {
 			isa = PBXGroup;
 			children = (
+				BEE3F4B11A00A58700F65D2B /* Sounds */,
 				BE22D01F19FEB61600E4F642 /* Levels */,
 				BE843DCE19F7330D00298057 /* BBImages.h */,
 				BE843DCF19F7330D00298057 /* BBImages.m */,
@@ -216,6 +227,18 @@
 				BE843DB819F5768C00298057 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BEE3F4B11A00A58700F65D2B /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				BEE3F4B21A00A58700F65D2B /* BallBounce.caf */,
+				BEE3F4B31A00A58700F65D2B /* BrickSmash.caf */,
+				BEE3F4B41A00A58700F65D2B /* LevelUp.caf */,
+				BEE3F4B51A00A58700F65D2B /* LoseLife.caf */,
+				BEE3F4B61A00A58700F65D2B /* PaddleBounce.caf */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,13 +322,18 @@
 				BE4FEEFA19FC35AA00970903 /* 1.json in Resources */,
 				BE4FEF0119FDFCC200970903 /* -1.json in Resources */,
 				BE4FEF0519FDFF0F00970903 /* 3.json in Resources */,
+				BEE3F4B91A00A58700F65D2B /* LevelUp.caf in Resources */,
 				BE843D9619F5768C00298057 /* InfoPlist.strings in Resources */,
 				BE843DCD19F5787700298057 /* README.md in Resources */,
 				BE843DA919F5768C00298057 /* Images.xcassets in Resources */,
 				BE843D9F19F5768C00298057 /* Main.storyboard in Resources */,
 				BE4FEF0E19FE27E000970903 /* BrickExplosion.sks in Resources */,
+				BEE3F4B71A00A58700F65D2B /* BallBounce.caf in Resources */,
 				BE4FEEFC19FC37CB00970903 /* allBricks.json in Resources */,
 				BE4FEF0319FDFEC500970903 /* 2.json in Resources */,
+				BEE3F4BA1A00A58700F65D2B /* LoseLife.caf in Resources */,
+				BEE3F4BB1A00A58700F65D2B /* PaddleBounce.caf in Resources */,
+				BEE3F4B81A00A58700F65D2B /* BrickSmash.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

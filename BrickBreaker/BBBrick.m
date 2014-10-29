@@ -13,6 +13,7 @@
 
 @implementation BBBrick
 {
+  SKAction *_brickSmashSound;
 }
 
 - (instancetype)initWithType:(BrickType)type
@@ -54,6 +55,7 @@
     self.type = type;
     self.initialTexture = self.texture;
     self.indestructible = (type == Gray);
+    _brickSmashSound = [SKAction playSoundFileNamed:@"BrickSmash.caf" waitForCompletion:NO];
   }
   
   return self;
@@ -64,6 +66,7 @@
   switch (self.type) {
     case Green:
       [self createExplosion];
+      [self runAction:_brickSmashSound];
       [self runAction:[SKAction removeFromParent]];
       break;
     case Blue:

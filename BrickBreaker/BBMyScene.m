@@ -28,10 +28,18 @@
   BOOL _positionBall;
   NSArray *_hearts;
   BBMenu *_menu;
+  
+  // Sounds
+  SKAction *_ballBounceSound;
+  SKAction *_paddleBounceSound;
+  SKAction *_levelUpSound;
+  SKAction *_loseLifeSound;
 }
 
 static const uint32_t kBallCategory = 0x1 << 0;
 static const uint32_t kPaddleCategory = 0x1 << 1;
+static const uint32_t kEdgeCategory = 0x1 << 2;
+
 static NSString * const kKeyBall = @"ball";
 static const int kFinalLevelNumber = 3;
 
@@ -49,6 +57,7 @@ static const int kFinalLevelNumber = 3;
     
     // Setup edge
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(0, -128, size.width, size.height + 100)];
+    self.physicsBody.categoryBitMask = kEdgeCategory;
     
     // Add HUD bar
     SKSpriteNode *bar = [SKSpriteNode spriteNodeWithColor:[SKColor colorWithRed:0.831 green:0.831 blue:0.831 alpha:1.0] size:CGSizeMake(size.width, 28)];
@@ -92,6 +101,12 @@ static const int kFinalLevelNumber = 3;
     _menu = [[BBMenu alloc] init];
     _menu.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
     [self addChild:_menu];
+    
+    // Setup sounds
+    _ballBounceSound = [SKAction playSoundFileNamed:@"BallBounce.caf" waitForCompletion:NO];
+    _paddleBounceSound = [SKAction playSoundFileNamed:@"PaddleBounce.caf" waitForCompletion:NO];
+    _levelUpSound = [SKAction playSoundFileNamed:@"LevelUp.caf" waitForCompletion:NO];
+    _loseLifeSound = [SKAction playSoundFileNamed:@"LoseLife.caf" waitForCompletion:NO];
     
     // Setup initial values
     _ballSpeed = 250.0;
@@ -213,7 +228,7 @@ static const int kFinalLevelNumber = 3;
   ball.physicsBody.restitution = 1.0;
   ball.physicsBody.velocity = velocity;
   ball.physicsBody.categoryBitMask = kBallCategory;
-  ball.physicsBody.contactTestBitMask = kPaddleCategory | kBrickCategory;
+  ball.physicsBody.contactTestBitMask = kPaddleCategory | kBrickCategory | kEdgeCategory;
   [self addChild:ball];
   return ball;
 }
@@ -286,6 +301,7 @@ static const int kFinalLevelNumber = 3;
     [self loadLevelNumber:self.currentLevel];
     [self newBall];
     [_menu show];
+    [self runAction:_levelUpSound];
   }
   else if (_ballReleased && !_positionBall && ![self childNodeWithName:kKeyBall]) {
     // Lost all balls
@@ -298,6 +314,7 @@ static const int kFinalLevelNumber = 3;
       [_menu show];
     }
     [self newBall];
+    [self runAction:_loseLifeSound];
   }
 }
 
@@ -345,15 +362,21 @@ static const int kFinalLevelNumber = 3;
       // Set ball's velocity based on direction and speed
       firstBody.velocity = CGVectorMake(direction.dx * _ballSpeed, direction.dy * _ballSpeed);
     }
+    [self runAction:_paddleBounceSound];
   }
   
   // Ball and Brick
   if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kBrickCategory) {
     if ([secondBody.node respondsToSelector:@selector(hit)]) {
       [secondBody.node performSelector:@selector(hit)];
+      [self runAction:_ballBounceSound];
     }
   }
   
+  // Ball and Wall
+  if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kEdgeCategory) {
+    [self runAction:_ballBounceSound];
+  }
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact
