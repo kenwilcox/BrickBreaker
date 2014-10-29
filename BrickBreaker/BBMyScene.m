@@ -58,7 +58,6 @@ static const int kFinalLevelNumber = 3;
     
     // Setup level display
     _levelDisplay = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
-//    _levelDisplay.text = @"LEVEL 1";
     _levelDisplay.fontColor = [SKColor whiteColor];
     _levelDisplay.fontSize = 15;
     _levelDisplay.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
