@@ -41,7 +41,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 static const uint32_t kEdgeCategory = 0x1 << 2;
 
 static NSString * const kKeyBall = @"ball";
-static const int kFinalLevelNumber = 3;
+static const int kFinalLevelNumber = 4;
 
 - (id)initWithSize:(CGSize)size
 {
@@ -229,8 +229,20 @@ static const int kFinalLevelNumber = 3;
   ball.physicsBody.velocity = velocity;
   ball.physicsBody.categoryBitMask = kBallCategory;
   ball.physicsBody.contactTestBitMask = kPaddleCategory | kBrickCategory | kEdgeCategory;
+  ball.physicsBody.collisionBitMask = kPaddleCategory | kBrickCategory | kEdgeCategory;
   [self addChild:ball];
   return ball;
+}
+
+-(void)spawnExtraBall:(CGPoint)position
+{
+  CGVector direction;
+  if (arc4random_uniform(2) == 0) {
+    direction = CGVectorMake(cosf(M_PI_4), sinf(M_PI_4));
+  } else {
+    direction = CGVectorMake(cosf(M_PI * 0.75), sinf(M_PI * 0.75));
+  }
+  [self createBallWithLocation:position andVelocity:CGVectorMake(direction.dx * _ballSpeed, direction.dy * _ballSpeed)];
 }
 
 #pragma mark SKNode Receivers
@@ -376,8 +388,11 @@ static const int kFinalLevelNumber = 3;
   if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kBrickCategory) {
     if ([secondBody.node respondsToSelector:@selector(hit)]) {
       [secondBody.node performSelector:@selector(hit)];
-      [self runAction:_ballBounceSound];
+      if (((BBBrick*)secondBody.node).spawnsExtraBall) {
+        [self spawnExtraBall:[_brickLayer convertPoint:secondBody.node.position toNode:self]];
+      }
     }
+    [self runAction:_ballBounceSound];
   }
   
   // Ball and Wall

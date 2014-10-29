@@ -55,6 +55,8 @@
     self.type = type;
     self.initialTexture = self.texture;
     self.indestructible = (type == Gray);
+    self.spawnsExtraBall = (type == Yellow);
+    
     _brickSmashSound = [SKAction playSoundFileNamed:@"BrickSmash.caf" waitForCompletion:NO];
   }
   
@@ -65,6 +67,9 @@
 {
   switch (self.type) {
     case Green:
+    case Yellow:
+    case Red:
+    case Purple:
       [self createExplosion];
       [self runAction:_brickSmashSound];
       [self runAction:[SKAction removeFromParent]];
@@ -76,7 +81,6 @@
     case Gray:
       break;
     default:
-      [self runAction:[SKAction removeFromParent]];
       break;
   }
 }

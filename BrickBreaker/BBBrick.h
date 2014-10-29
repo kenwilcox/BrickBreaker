@@ -12,9 +12,9 @@ typedef enum : NSUInteger {
   Green = 1,
   Blue = 2,
   Gray = 3,
-  Purple = 4,
+  Yellow = 4,
   Red = 5,
-  Yellow = 6,
+  Purple = 6,
 } BrickType;
 
 static const uint32_t kBrickCategory = 0x1 << 2;
@@ -24,6 +24,7 @@ static const uint32_t kBrickCategory = 0x1 << 2;
 @property (nonatomic) BrickType type;
 @property (nonatomic) SKTexture* initialTexture;
 @property (nonatomic) BOOL indestructible;
+@property (nonatomic) BOOL spawnsExtraBall;
 
 - (instancetype)initWithType:(BrickType)type;
 - (void)hit;

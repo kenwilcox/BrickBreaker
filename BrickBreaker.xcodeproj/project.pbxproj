@@ -41,6 +41,7 @@
 		BEE3F4B91A00A58700F65D2B /* LevelUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B41A00A58700F65D2B /* LevelUp.caf */; };
 		BEE3F4BA1A00A58700F65D2B /* LoseLife.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B51A00A58700F65D2B /* LoseLife.caf */; };
 		BEE3F4BB1A00A58700F65D2B /* PaddleBounce.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B61A00A58700F65D2B /* PaddleBounce.caf */; };
+		BEE3F4BD1A00B11D00F65D2B /* 4.json in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4BC1A00B11D00F65D2B /* 4.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		BEE3F4B41A00A58700F65D2B /* LevelUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LevelUp.caf; sourceTree = "<group>"; };
 		BEE3F4B51A00A58700F65D2B /* LoseLife.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoseLife.caf; sourceTree = "<group>"; };
 		BEE3F4B61A00A58700F65D2B /* PaddleBounce.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaddleBounce.caf; sourceTree = "<group>"; };
+		BEE3F4BC1A00B11D00F65D2B /* 4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 4.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				BE4FEEF919FC35AA00970903 /* 1.json */,
 				BE4FEF0219FDFEC500970903 /* 2.json */,
 				BE4FEF0419FDFF0F00970903 /* 3.json */,
+				BEE3F4BC1A00B11D00F65D2B /* 4.json */,
 				BE4FEF0019FDFCC200970903 /* -1.json */,
 				BE4FEEFB19FC37CB00970903 /* allBricks.json */,
 			);
@@ -327,6 +330,7 @@
 				BE843DCD19F5787700298057 /* README.md in Resources */,
 				BE843DA919F5768C00298057 /* Images.xcassets in Resources */,
 				BE843D9F19F5768C00298057 /* Main.storyboard in Resources */,
+				BEE3F4BD1A00B11D00F65D2B /* 4.json in Resources */,
 				BE4FEF0E19FE27E000970903 /* BrickExplosion.sks in Resources */,
 				BEE3F4B71A00A58700F65D2B /* BallBounce.caf in Resources */,
 				BE4FEEFC19FC37CB00970903 /* allBricks.json in Resources */,
