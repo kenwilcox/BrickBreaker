@@ -222,7 +222,10 @@ static const int kFinalLevelNumber = 6;
             brick.point.x == redBrick.point.x ||
             brick.point.x == redBrick.point.x + 1) {
           
-          [brick hit];
+          SKAction *action = [SKAction waitForDuration:0.1];
+          [brick runAction:action completion:^{
+            [brick hit];
+          }];
           
         }
       }
