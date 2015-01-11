@@ -41,7 +41,7 @@ static const uint32_t kPaddleCategory = 0x1 << 1;
 static const uint32_t kEdgeCategory = 0x1 << 2;
 
 static NSString * const kKeyBall = @"ball";
-static const int kFinalLevelNumber = 4;
+static const int kFinalLevelNumber = 6;
 
 - (id)initWithSize:(CGSize)size
 {
