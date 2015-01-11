@@ -172,6 +172,7 @@ static const int kFinalLevelNumber = 6;
             if (brick) {
               brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col)
                                            , -(2 + (brick.size.height * 0.5) + ((brick.size.height + 3) * row)));
+              brick.point = CGPointMake(row, col);
               [_brickLayer addChild:brick];
             }
           }
@@ -199,6 +200,34 @@ static const int kFinalLevelNumber = 6;
   }
   // Couldn't find any non-indestructible bricks
   return YES;
+}
+
+- (void)explodNeighboringBricks:(BBBrick *)redBrick
+{
+  // Find neighboring bricks to explode
+  /*
+   (x-1, y-1), (x, y-1), (x+1, y-1)
+   (x-1, y)  , (x, y)  , (x+1, y)
+   (x-1, y+1), (x, y+1), (x+1, y+1)
+   */
+  for (SKNode *node in _brickLayer.children) {
+    if ([node isKindOfClass:[BBBrick class]]) {
+      BBBrick *brick = (BBBrick *)node;
+      
+      if (brick.point.y == redBrick.point.y -1 ||
+          brick.point.y == redBrick.point.y ||
+          brick.point.y == redBrick.point.y + 1) {
+        
+        if (brick.point.x == redBrick.point.x - 1 ||
+            brick.point.x == redBrick.point.x ||
+            brick.point.x == redBrick.point.x + 1) {
+          
+          [brick hit];
+          
+        }
+      }
+    }
+  }
 }
 
 #pragma mark Generators
@@ -391,6 +420,10 @@ static const int kFinalLevelNumber = 6;
       if (((BBBrick*)secondBody.node).spawnsExtraBall) {
         [self spawnExtraBall:[_brickLayer convertPoint:secondBody.node.position toNode:self]];
       }
+      else if (((BBBrick*)secondBody.node).expolding) {
+        [self explodNeighboringBricks:((BBBrick*)secondBody.node)];
+      }
+
     }
     [self runAction:_ballBounceSound];
   }
