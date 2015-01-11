@@ -22,7 +22,7 @@
   // http://blog.wilshipley.com/2005/07/self-stupid-init.html
   if (!(self = [super initWithTexture:[BBImages brickTextureOfColor:[UIColor grayBrickColor]]]))
     return nil;
-  
+
   switch (type) {
     case Purple:
       self.color = [UIColor purpleBrickColor];
@@ -56,6 +56,7 @@
     self.initialTexture = self.texture;
     self.indestructible = (type == Gray);
     self.spawnsExtraBall = (type == Yellow);
+    self.expolding = (type == Red);
     
     _brickSmashSound = [SKAction playSoundFileNamed:@"BrickSmash.caf" waitForCompletion:NO];
   }

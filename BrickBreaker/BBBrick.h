@@ -25,6 +25,8 @@ static const uint32_t kBrickCategory = 0x1 << 2;
 @property (nonatomic) SKTexture* initialTexture;
 @property (nonatomic) BOOL indestructible;
 @property (nonatomic) BOOL spawnsExtraBall;
+@property (nonatomic) BOOL expolding;
+@property (nonatomic) CGPoint point;
 
 - (instancetype)initWithType:(BrickType)type;
 - (void)hit;
