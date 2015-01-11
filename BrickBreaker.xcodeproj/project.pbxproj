@@ -8,14 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		BE22D01E19FEB60600E4F642 /* BBMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BE22D01D19FEB60600E4F642 /* BBMenu.m */; };
+		BE33AAA71A6238D10077B1DB /* 6.json in Resources */ = {isa = PBXBuildFile; fileRef = BE33AAA61A6238D10077B1DB /* 6.json */; };
 		BE4FEEF519F9B8F900970903 /* BBBrick.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4FEEF419F9B8F900970903 /* BBBrick.m */; };
 		BE4FEEF819F9BBE900970903 /* BBImages+SpriteKit.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4FEEF719F9BBE900970903 /* BBImages+SpriteKit.m */; };
-		BE4FEEFA19FC35AA00970903 /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEEF919FC35AA00970903 /* 1.json */; };
+		BE4FEEFA19FC35AA00970903 /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEEF919FC35AA00970903 /* 2.json */; };
 		BE4FEEFC19FC37CB00970903 /* allBricks.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEEFB19FC37CB00970903 /* allBricks.json */; };
 		BE4FEEFF19FDF8FC00970903 /* BBBrickColor.m in Sources */ = {isa = PBXBuildFile; fileRef = BE4FEEFE19FDF8FC00970903 /* BBBrickColor.m */; };
-		BE4FEF0119FDFCC200970903 /* -1.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0019FDFCC200970903 /* -1.json */; };
-		BE4FEF0319FDFEC500970903 /* 2.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0219FDFEC500970903 /* 2.json */; };
-		BE4FEF0519FDFF0F00970903 /* 3.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0419FDFF0F00970903 /* 3.json */; };
+		BE4FEF0119FDFCC200970903 /* 1.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0019FDFCC200970903 /* 1.json */; };
+		BE4FEF0319FDFEC500970903 /* 3.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0219FDFEC500970903 /* 3.json */; };
+		BE4FEF0519FDFF0F00970903 /* 4.json in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0419FDFF0F00970903 /* 4.json */; };
 		BE4FEF0E19FE27E000970903 /* BrickExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0C19FE27E000970903 /* BrickExplosion.sks */; };
 		BE4FEF0F19FE27E000970903 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = BE4FEF0D19FE27E000970903 /* spark.png */; };
 		BE843D8A19F5768C00298057 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE843D8919F5768C00298057 /* Foundation.framework */; };
@@ -41,7 +42,7 @@
 		BEE3F4B91A00A58700F65D2B /* LevelUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B41A00A58700F65D2B /* LevelUp.caf */; };
 		BEE3F4BA1A00A58700F65D2B /* LoseLife.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B51A00A58700F65D2B /* LoseLife.caf */; };
 		BEE3F4BB1A00A58700F65D2B /* PaddleBounce.caf in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4B61A00A58700F65D2B /* PaddleBounce.caf */; };
-		BEE3F4BD1A00B11D00F65D2B /* 4.json in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4BC1A00B11D00F65D2B /* 4.json */; };
+		BEE3F4BD1A00B11D00F65D2B /* 5.json in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F4BC1A00B11D00F65D2B /* 5.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,17 +58,18 @@
 /* Begin PBXFileReference section */
 		BE22D01C19FEB60600E4F642 /* BBMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBMenu.h; sourceTree = "<group>"; };
 		BE22D01D19FEB60600E4F642 /* BBMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBMenu.m; sourceTree = "<group>"; };
+		BE33AAA61A6238D10077B1DB /* 6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 6.json; sourceTree = "<group>"; };
 		BE4FEEF319F9B8F900970903 /* BBBrick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBrick.h; sourceTree = "<group>"; };
 		BE4FEEF419F9B8F900970903 /* BBBrick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBrick.m; sourceTree = "<group>"; };
 		BE4FEEF619F9BBE900970903 /* BBImages+SpriteKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BBImages+SpriteKit.h"; sourceTree = "<group>"; };
 		BE4FEEF719F9BBE900970903 /* BBImages+SpriteKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BBImages+SpriteKit.m"; sourceTree = "<group>"; };
-		BE4FEEF919FC35AA00970903 /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
+		BE4FEEF919FC35AA00970903 /* 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 2.json; sourceTree = "<group>"; };
 		BE4FEEFB19FC37CB00970903 /* allBricks.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = allBricks.json; sourceTree = "<group>"; };
 		BE4FEEFD19FDF8FC00970903 /* BBBrickColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBBrickColor.h; sourceTree = "<group>"; };
 		BE4FEEFE19FDF8FC00970903 /* BBBrickColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBBrickColor.m; sourceTree = "<group>"; };
-		BE4FEF0019FDFCC200970903 /* -1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "-1.json"; sourceTree = "<group>"; };
-		BE4FEF0219FDFEC500970903 /* 2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 2.json; sourceTree = "<group>"; };
-		BE4FEF0419FDFF0F00970903 /* 3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 3.json; sourceTree = "<group>"; };
+		BE4FEF0019FDFCC200970903 /* 1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 1.json; sourceTree = "<group>"; };
+		BE4FEF0219FDFEC500970903 /* 3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 3.json; sourceTree = "<group>"; };
+		BE4FEF0419FDFF0F00970903 /* 4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 4.json; sourceTree = "<group>"; };
 		BE4FEF0C19FE27E000970903 /* BrickExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrickExplosion.sks; sourceTree = "<group>"; };
 		BE4FEF0D19FE27E000970903 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		BE843D8619F5768C00298057 /* BrickBreaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickBreaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +102,7 @@
 		BEE3F4B41A00A58700F65D2B /* LevelUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LevelUp.caf; sourceTree = "<group>"; };
 		BEE3F4B51A00A58700F65D2B /* LoseLife.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoseLife.caf; sourceTree = "<group>"; };
 		BEE3F4B61A00A58700F65D2B /* PaddleBounce.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaddleBounce.caf; sourceTree = "<group>"; };
-		BEE3F4BC1A00B11D00F65D2B /* 4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 4.json; sourceTree = "<group>"; };
+		BEE3F4BC1A00B11D00F65D2B /* 5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 5.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,11 +133,12 @@
 		BE22D01F19FEB61600E4F642 /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				BE4FEEF919FC35AA00970903 /* 1.json */,
-				BE4FEF0219FDFEC500970903 /* 2.json */,
-				BE4FEF0419FDFF0F00970903 /* 3.json */,
-				BEE3F4BC1A00B11D00F65D2B /* 4.json */,
-				BE4FEF0019FDFCC200970903 /* -1.json */,
+				BE4FEF0019FDFCC200970903 /* 1.json */,
+				BE4FEEF919FC35AA00970903 /* 2.json */,
+				BE4FEF0219FDFEC500970903 /* 3.json */,
+				BE4FEF0419FDFF0F00970903 /* 4.json */,
+				BEE3F4BC1A00B11D00F65D2B /* 5.json */,
+				BE33AAA61A6238D10077B1DB /* 6.json */,
 				BE4FEEFB19FC37CB00970903 /* allBricks.json */,
 			);
 			name = Levels;
@@ -322,19 +325,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE4FEF0F19FE27E000970903 /* spark.png in Resources */,
-				BE4FEEFA19FC35AA00970903 /* 1.json in Resources */,
-				BE4FEF0119FDFCC200970903 /* -1.json in Resources */,
-				BE4FEF0519FDFF0F00970903 /* 3.json in Resources */,
+				BE4FEEFA19FC35AA00970903 /* 2.json in Resources */,
+				BE4FEF0119FDFCC200970903 /* 1.json in Resources */,
+				BE4FEF0519FDFF0F00970903 /* 4.json in Resources */,
 				BEE3F4B91A00A58700F65D2B /* LevelUp.caf in Resources */,
+				BE33AAA71A6238D10077B1DB /* 6.json in Resources */,
 				BE843D9619F5768C00298057 /* InfoPlist.strings in Resources */,
 				BE843DCD19F5787700298057 /* README.md in Resources */,
 				BE843DA919F5768C00298057 /* Images.xcassets in Resources */,
 				BE843D9F19F5768C00298057 /* Main.storyboard in Resources */,
-				BEE3F4BD1A00B11D00F65D2B /* 4.json in Resources */,
+				BEE3F4BD1A00B11D00F65D2B /* 5.json in Resources */,
 				BE4FEF0E19FE27E000970903 /* BrickExplosion.sks in Resources */,
 				BEE3F4B71A00A58700F65D2B /* BallBounce.caf in Resources */,
 				BE4FEEFC19FC37CB00970903 /* allBricks.json in Resources */,
-				BE4FEF0319FDFEC500970903 /* 2.json in Resources */,
+				BE4FEF0319FDFEC500970903 /* 3.json in Resources */,
 				BEE3F4BA1A00A58700F65D2B /* LoseLife.caf in Resources */,
 				BEE3F4BB1A00A58700F65D2B /* PaddleBounce.caf in Resources */,
 				BEE3F4B81A00A58700F65D2B /* BrickSmash.caf in Resources */,
